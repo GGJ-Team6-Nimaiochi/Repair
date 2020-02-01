@@ -19,22 +19,25 @@ public class SelectStoryData : MonoBehaviour
         }
     }
 
-    public void Init(int arrayNum)
+    public void Init(int arrayNum, int chapter)
     {
-        text = null;
-        chapter = -1;
-        id = null;
+        text = new string[arrayNum];
+        this.chapter = chapter;
+        id = new int[arrayNum];
         text = new string[arrayNum];
         id = new int[arrayNum];
     }
 
-    public void SetData(int arrayNo,string text,int chapter,int id)
+    public void SetData(int index,string text,int id)
     {
-        this.text[arrayNo] = text;
-        this.chapter = chapter;
-        this.id[arrayNo] = id;
+        this.text[index] = text;
+        this.id[index] = id;
     }
 
+    public void SetID(int index, int id)
+    {
+        this.id[index] = id;
+    }
 
     private void OnDestroy()
     {
