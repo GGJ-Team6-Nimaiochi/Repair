@@ -67,6 +67,9 @@ public class DragManage : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         draggingImage.color = sourceImage.color;
         draggingImage.material = sourceImage.material;
 
+        var textObj = Instantiate(gameObject.transform.Find("Text"), dragObject.transform);
+        textObj.GetComponent<Text>().text = text.text;
+
         gameObject.GetComponent<Image>().color = Vector4.one * 0.6f;
     }
 }
