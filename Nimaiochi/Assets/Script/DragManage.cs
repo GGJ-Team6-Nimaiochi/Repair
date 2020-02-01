@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 public class DragManage : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     public Transform canvas;
-    private GameObject dragObject;
+    public GameObject dragObject;
 
 
     public void OnBeginDrag(PointerEventData data)
@@ -24,8 +24,13 @@ public class DragManage : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     public void OnEndDrag(PointerEventData data)
     {
         Debug.Log("OnEndDrag");
+        gameObject.GetComponent<Image>().color = Vector4.one;
+        DestroyDragObject();
+    }
+
+    public void DestroyDragObject()
+    {
         Destroy(dragObject);
-        Destroy(this.gameObject);
     }
 
     // ドラッグオブジェクト作成

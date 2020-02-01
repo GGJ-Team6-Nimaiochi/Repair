@@ -10,11 +10,15 @@ namespace MyStory.StoryRepair
     {
         [SerializeField] GameObject PageParent;
         [SerializeField] GameObject pageContent;
+        [SerializeField] GameObject textParent;
+        [SerializeField] GameObject textContent;
 
         private List<GameObject> pageContentList;
+        private List<GameObject> textContentList;
 
         private void Start() // 後で消す
         {
+            CreatDropFildList();
             CreatPageList();
         }
 
@@ -28,7 +32,19 @@ namespace MyStory.StoryRepair
                 var page = Instantiate(pageContent, PageParent.transform);
                 pageContentList.Add(page);
             }
-            pageContent.gameObject.SetActive(false);
+            pageContent.SetActive(false);
+        }
+
+        private void CreatDropFildList()
+        {
+            textContentList = new List<GameObject>();
+            textContent.SetActive(true);
+            for (int i = 0; i < 3; i++)
+            {
+                var page = Instantiate(textContent, textParent.transform);
+                textContentList.Add(page);
+            }
+            textContent.SetActive(false);
         }
 
     }
