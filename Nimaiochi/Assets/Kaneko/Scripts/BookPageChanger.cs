@@ -13,8 +13,6 @@ public class BookPageChanger : MonoBehaviour
     Transform pageTransform = null;
 
     [SerializeField]
-    UGUIButton leftButton = null;
-    [SerializeField]
     UGUIButton rightButton = null;
 
     BookRenderer bookRenderer = null;
@@ -30,7 +28,6 @@ public class BookPageChanger : MonoBehaviour
 
     void Start()
     {
-        leftButton.OnClickEvent.AddListener(() => BackPage());
         rightButton.OnClickEvent.AddListener(() => NextPage());
 
         Init();

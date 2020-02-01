@@ -5,20 +5,20 @@ using UnityEngine;
 public class BookRenderer : MonoBehaviour
 {
     [SerializeField]
-    Renderer leftPageRenderer = null;
+    Renderer frontEndpaperRend = null;
     [SerializeField]
-    Renderer rightPageRenderer = null;
+    Renderer backEndpaperRend = null;
+    [SerializeField]
+    Renderer moveFrontRend = null;
+    [SerializeField]
+    Renderer moveBackRend = null;
 
-    [SerializeField]
-    Renderer movePageRenderer = null;
-    [SerializeField]
-    Renderer movePageBackRenderer = null;
-
-    public void SetTextrue(Texture2D left, Texture2D move, Texture2D moveBack, Texture2D right)
+    public void SetTextrue(Texture2D frontEnd, Texture2D moveFront, Texture2D moveBack, Texture2D backEnd)
     {
-        leftPageRenderer.material.mainTexture = left;
-        rightPageRenderer.material.mainTexture = right;
-        movePageRenderer.material.mainTexture = move;
-        movePageBackRenderer.material.mainTexture = moveBack;
+        frontEndpaperRend.material.mainTexture = frontEnd;
+        moveFrontRend.material.mainTexture = moveFront;
+        moveBackRend.material.mainTexture = moveBack;
+        backEndpaperRend.material.mainTexture = backEnd;
     }
 }
+
