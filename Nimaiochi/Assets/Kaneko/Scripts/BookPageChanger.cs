@@ -93,8 +93,8 @@ public class BookPageChanger : MonoBehaviour
     {
         pageTransform.SetRotationZ(Mathf.Lerp(-89.0f, 90.0f, rate));
         // 紙芝居アニメーションしてます
-        if (StorySimulator.Chapter && rate > 0) StorySimulator.Chapter.transform.GetChild(0).localScale = new Vector3(1 - 1 * rate, 1 - 1 * rate, 1 - 1 * rate);
-        if (StorySimulator.Chapter && rate > 0) StorySimulator.Chapter.transform.GetChild(0).transform.localPosition = new Vector3(0 - 10f * rate, StorySimulator.Chapter.transform.GetChild(0).transform.localPosition.y, StorySimulator.Chapter.transform.GetChild(0).transform.localPosition.z);
+        if (StorySimulator.Instance.Chapter && rate > 0) StorySimulator.Instance.Chapter.transform.GetChild(0).localScale = new Vector3(1 - 1 * rate, 1 - 1 * rate, 1 - 1 * rate);
+        if (StorySimulator.Instance.Chapter && rate > 0) StorySimulator.Instance.Chapter.transform.GetChild(0).transform.localPosition = new Vector3(0 - 10f * rate, StorySimulator.Instance.Chapter.transform.GetChild(0).transform.localPosition.y, StorySimulator.Instance.Chapter.transform.GetChild(0).transform.localPosition.z);
     }
 
     void UpdateTexture(int index)
@@ -106,7 +106,7 @@ public class BookPageChanger : MonoBehaviour
             temp = Mathf.Min(index + 1, pageTextures.Length - 1);
         }
         // 紙芝居を消す
-        if (!isReturn && StorySimulator.Chapter && StorySimulator.Chapter.transform.GetChild(0).localRotation.x <= 0) Destroy(StorySimulator.Chapter);
+        if (!isReturn && StorySimulator.Instance.Chapter && StorySimulator.Instance.Chapter.transform.GetChild(0).localRotation.x <= 0) Destroy(StorySimulator.Instance.Chapter);
         bookRenderer.SetTextrue(pageTextures[index].LeftTexture, pageTextures[index].RightTexture, pageTextures[temp].LeftTexture, pageTextures[temp].RightTexture);
         isReturn = false;
     }

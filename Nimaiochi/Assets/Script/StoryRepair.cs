@@ -27,6 +27,9 @@ namespace MyStory.StoryRepair
         [SerializeField] GameObject textContent;
         [SerializeField] GameObject nonSelectTextContent;
         [SerializeField] Button nextButton;
+        [SerializeField] private GameObject uGuiButton3D;
+        [SerializeField] private KanekoUtilities.Panel stroyRepairPanel; 
+        [SerializeField] private StorySimulator stroySimulator; 
 
         //選択肢を確定した数
         private int selectNum;
@@ -163,13 +166,44 @@ namespace MyStory.StoryRepair
         public void SelectText()
         {
             selectNum++;
+
             //全て選択し終わったらNEXTを表示
             if(selectNum >= dropFildNum)
             {
                 nextButton.gameObject.SetActive(true);
+                uGuiButton3D.SetActive(true);
             }
         }
 
+        private int key = 0;
+        public void OnPushPlay()
+        {
+            try
+            {
+                switch (StorySimulator.Instance.Phase)
+                {
+                    case 0:
+                        StorySimulator.Instance.Chapter = Instantiate(StorySimulator.Instance.ChaptersSelections[0][0]);
+                        break;
+                    default:
+                        StorySimulator.Instance.Chapter = Instantiate(StorySimulator.Instance.ChaptersSelections[StorySimulator.Instance.Phase][SelectStoryData.Instance.id[key]]);
+                        break;
+                    
+                }
+
+                StorySimulator.Instance.IsStory = true;
+                StorySimulator.Instance.SetStoryText(key);
+                StorySimulator.Instance.Phase++;
+                key++;
+                stroyRepairPanel.Deactivate();
+                uGuiButton3D.SetActive(false);
+                nextButton.gameObject.SetActive(false);
+            }
+            catch
+            {
+                Debug.LogError("Error");
+            }
+        }
     }
 
     public class PageContentData

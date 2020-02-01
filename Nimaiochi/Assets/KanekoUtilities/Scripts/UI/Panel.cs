@@ -25,6 +25,7 @@ namespace KanekoUtilities
         {
             SetAnimation();
             if(activeOnAwake) Activate();
+            else Deactivate();
         }
 
         protected virtual void SetAnimation()
