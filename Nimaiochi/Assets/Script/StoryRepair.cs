@@ -35,6 +35,7 @@ namespace MyStory.StoryRepair
 
     public class PageContentData
     {
-        string clause;
+        string text;
+
     }
 }

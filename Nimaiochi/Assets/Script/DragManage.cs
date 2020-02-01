@@ -24,7 +24,8 @@ public class DragManage : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     public void OnEndDrag(PointerEventData data)
     {
         Debug.Log("OnEndDrag");
-        GetComponent<CanvasGroup>().blocksRaycasts = true;
+        Destroy(dragObject);
+        Destroy(this.gameObject);
     }
 
     // ドラッグオブジェクト作成
