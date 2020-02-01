@@ -8,6 +8,7 @@ using UnityEngine.EventSystems;
 public class DropArea : MonoBehaviour, IDropHandler
 {
     [SerializeField] public Text text;
+    [SerializeField] RectTransform limImageRect = null;
 
     private int arrayNo;
     private Action endAction;
@@ -17,6 +18,8 @@ public class DropArea : MonoBehaviour, IDropHandler
         this.arrayNo = arrayNo;
         this.text.text = text;
         this.endAction = endAction;
+
+        limImageRect.anchoredPosition = Vector2.right * ((text.Length * this.text.fontSize) + 275.0f);
     }
 
     public void OnDrop(PointerEventData data)
@@ -30,6 +33,7 @@ public class DropArea : MonoBehaviour, IDropHandler
             text.text += dragObj.text.text;
             SelectStoryData.Instance.SetID(arrayNo, dragObj.pageContentData.id);
             dragObj.DestroyDragObject();
+            limImageRect.gameObject.SetActive(false);
             Destroy(dragObj.gameObject);
             endAction();
             this.enabled = false;
