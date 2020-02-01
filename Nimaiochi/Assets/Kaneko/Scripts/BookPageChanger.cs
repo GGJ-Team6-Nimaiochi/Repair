@@ -28,7 +28,8 @@ public class BookPageChanger : MonoBehaviour
     int currentPageIndex = 0;
     float currentRate;
     bool isAnimating;
-
+    private bool isReturn = false;
+    
     void Awake()
     {
         bookRenderer = GetComponent<BookRenderer>();
@@ -52,10 +53,15 @@ public class BookPageChanger : MonoBehaviour
 
         SwipeGetter.Instance.onTouchEnd.AddListener((_) =>
         {
-            if(currentRate < 0.2f)
+            if (currentRate < 0.2f)
+            {
+                isReturn = true;
                 StartCoroutine(ChangePageAnimation(0.0f, currentPageIndex));
+            }
             else
+            {
                 StartCoroutine(ChangePageAnimation(1.0f, currentPageIndex + 1));
+            }
         });
     }
 
@@ -86,13 +92,23 @@ public class BookPageChanger : MonoBehaviour
     void UpdateMovePage(float rate)
     {
         pageTransform.SetRotationZ(Mathf.Lerp(-89.0f, 90.0f, rate));
+        // 紙芝居アニメーションしてます
+        if (StorySimulator.Chapter && rate > 0) StorySimulator.Chapter.transform.GetChild(0).localScale = new Vector3(1 - 1 * rate, 1 - 1 * rate, 1 - 1 * rate);
+        if (StorySimulator.Chapter && rate > 0) StorySimulator.Chapter.transform.GetChild(0).transform.localPosition = new Vector3(0 - 10f * rate, StorySimulator.Chapter.transform.GetChild(0).transform.localPosition.y, StorySimulator.Chapter.transform.GetChild(0).transform.localPosition.z);
     }
 
     void UpdateTexture(int index)
     {
         var temp = Mathf.Min(index + 1, pageTextures.Length - 1);
-
+        if (index + 1 > pageTextures.Length - 1)
+        {
+            index = 0;
+            temp = Mathf.Min(index + 1, pageTextures.Length - 1);
+        }
+        // 紙芝居を消す
+        if (!isReturn && StorySimulator.Chapter && StorySimulator.Chapter.transform.GetChild(0).localRotation.x <= 0) Destroy(StorySimulator.Chapter);
         bookRenderer.SetTextrue(pageTextures[index].LeftTexture, pageTextures[index].RightTexture, pageTextures[temp].LeftTexture, pageTextures[temp].RightTexture);
+        isReturn = false;
     }
 
     int ClampPageIndex(int index)

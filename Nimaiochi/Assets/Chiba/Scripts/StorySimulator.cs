@@ -15,7 +15,7 @@ public class StorySimulator : MonoBehaviour
     [SerializeField] private List<GameObject[]> chaptersSelections = new List<GameObject[]>();
     private int phase = 0;
     private int key = 0;
-    private GameObject chapter = null;
+    public static GameObject Chapter = null;
     
     private void Awake()
     {
@@ -26,19 +26,18 @@ public class StorySimulator : MonoBehaviour
         chaptersSelections.Add(chapter4Selections);
         chaptersSelections.Add(chapter5Selections);
         chaptersSelections.Add(chapter6Selections);
+    }
 
-        this.UpdateAsObservable().Where(_ => Input.GetMouseButtonDown(0)).Subscribe(_ =>
+    public void OnPushPlay()
+    {
+        try
         {
-            try
-            {
-                if(chapter) chapter.transform.GetChild(0).GetComponent<Animator>().SetBool("isClose", true);
-                chapter = Instantiate(chaptersSelections[phase][key], new Vector3(100, 0, 0), Quaternion.identity);
-                phase++;
-            }
-            catch
-            {
-                Debug.LogError("Error");
-            }
-        }).AddTo(this);
+            Chapter = Instantiate(chaptersSelections[phase][key]);
+            phase++;
+        }
+        catch
+        {
+            Debug.LogError("Error");
+        }
     }
 }
