@@ -14,6 +14,7 @@ public class Chapter1 : Chapter
             for (int i = 0; i < houses.Length; i++)
             {
                 houses[i].sprite = HouseSprites[SelectStoryData.Instance.id[i]];
+                StorySimulator.Instance.SelectHouses[i] = HouseSprites[SelectStoryData.Instance.id[i]];
             }
         }
 

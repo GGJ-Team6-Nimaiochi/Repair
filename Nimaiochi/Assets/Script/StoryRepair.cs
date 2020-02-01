@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UniRx;
+using UniRx.Triggers;
 
 namespace MyStory.StoryRepair
 {
@@ -17,9 +18,11 @@ namespace MyStory.StoryRepair
         [SerializeField] GameObject nonSelectTextContent;
         [SerializeField] Button nextButton;
         [SerializeField] private GameObject uGuiButton3D;
-        [SerializeField] private KanekoUtilities.Panel stroyRepairPanel; 
         [SerializeField] private StorySimulator stroySimulator; 
-        
+
+        public static StoryRepair Instance;
+        public KanekoUtilities.Panel StoryRepairPanel; 
+
         private List<GameObject> pageContentList;
         private List<GameObject> textContentList;
         private List<GameObject> nonSelectTextContentList;
@@ -36,6 +39,7 @@ namespace MyStory.StoryRepair
 
         private void Start() // 後で消す
         {
+            Instance = this;
             currentChapter = 0;
             InitNums();
             CheckChapterTextData();
@@ -225,7 +229,6 @@ namespace MyStory.StoryRepair
             }
         }
 
-        private int key = 0;
         public void OnPushPlay()
         {
             try
@@ -234,25 +237,26 @@ namespace MyStory.StoryRepair
                 {
                     case 0:
                         StorySimulator.Instance.Chapter = Instantiate(StorySimulator.Instance.ChaptersSelections[0][0]);
+                        StorySimulator.Instance.Chapter.name = "Chapter_0";
+                        StorySimulator.Instance.PlayAll = true;
                         break;
                     default:
-                        StorySimulator.Instance.Chapter = Instantiate(StorySimulator.Instance.ChaptersSelections[StorySimulator.Instance.Phase][SelectStoryData.Instance.id[key]]);
+                        StorySimulator.Instance.Chapter = Instantiate(StorySimulator.Instance.ChaptersSelections[StorySimulator.Instance.Phase][SelectStoryData.Instance.id[0]]);
+                        StorySimulator.Instance.Chapter.name = "Chapter_" + SelectStoryData.Instance.id[0];
+                        StorySimulator.Instance.PlayAll = false;
                         break;
                     
                 }
-
+                
                 StorySimulator.Instance.IsStory = true;
-                StorySimulator.Instance.SetStoryText(key);
-                StorySimulator.Instance.Phase++;
-                key++;
-                stroyRepairPanel.Deactivate();
+                StorySimulator.Instance.SetStoryText(0);
+                StoryRepairPanel.Deactivate();
                 selectTextPoint = -1;
                 DestroyPage();
                 AddChapter();
                 CheckChapterTextData();
                 CreatNonSelectText();
                 CreatPageList();
-                uGuiButton3D.SetActive(false);
                 nextButton.gameObject.SetActive(false);
             }
             catch

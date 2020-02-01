@@ -428,8 +428,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6170741e9a2849f384a13a119a75f5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  houseSprites: []
-  buta1HouseImage: {fileID: 0}
-  buta2HouseImage: {fileID: 0}
-  buta3HouseImage: {fileID: 0}
-  animator: {fileID: 7786902864990464561}
+  HouseSprites: []

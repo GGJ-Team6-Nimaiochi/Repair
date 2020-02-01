@@ -28,6 +28,7 @@ namespace KanekoUtilities
             {
                 base.OnClick();
                 Button.interactable = true;
+                this.gameObject.SetActive(false);
             }));
         }
     }

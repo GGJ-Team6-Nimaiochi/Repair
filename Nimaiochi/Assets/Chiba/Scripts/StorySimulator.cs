@@ -1,13 +1,17 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections.Generic;
+using MyStory.StoryRepair;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine.UI;
 
 public class StorySimulator : MonoBehaviour
 {
+    [HideInInspector] public bool IsStory = false;
+    [HideInInspector] public bool PlayAll = false;
     [HideInInspector] public int Phase = 0;
+    [HideInInspector] public Sprite[] SelectHouses = new Sprite[3];
     [HideInInspector] public GameObject Chapter = null;
 
     [SerializeField] private GameObject[] chapter1Selections;
@@ -17,12 +21,11 @@ public class StorySimulator : MonoBehaviour
     [SerializeField] private GameObject[] chapter5Selections;
     [SerializeField] private GameObject[] chapter6Selections;
     [SerializeField] private GameObject[] ending;
-
+    
     [SerializeField] private Text storyText;
     
     public List<GameObject[]> ChaptersSelections = new List<GameObject[]>();
     public static StorySimulator Instance = null;
-    public bool IsStory = false;
     private int id = 0;
     
     private void Awake()
@@ -38,19 +41,44 @@ public class StorySimulator : MonoBehaviour
         ChaptersSelections.Add(ending);
 
         this.UpdateAsObservable().Where(_ => IsStory && Input.GetMouseButtonDown(0)).Subscribe(_ => SetStoryText(id)).AddTo(this);
+        this.UpdateAsObservable().Where(_ => IsStory && !PlayAll && Input.GetMouseButtonDown(0)).Subscribe(_ => SetNextStory()).AddTo(this);
     }
 
+    // ストーリー表示中の文字処理
     public void SetStoryText(int key)
     {
         if (key >= SelectStoryData.Instance.text.Length)
         {
-            IsStory = false;
-            id = 0;
-            
+            storyText.text = "(ページをめくってね！)";
+            if(Chapter)Destroy(Chapter.transform.GetChild(0).GetComponent<Animator>());
+            return;
         }
         
         if(!storyText.transform.parent.gameObject.activeSelf)storyText.transform.parent.gameObject.SetActive(true);
         storyText.text = SelectStoryData.Instance.text[key];
         id++;
+    }
+
+    // ストーリー表示中の文字処理
+    public void SetNextStory()
+    {
+        var animator = Chapter.transform.GetChild(0).GetComponent<Animator>();
+        animator.SetBool("isClose", true);
+        Observable.Timer(TimeSpan.FromSeconds(1)).Subscribe(_ => Destroy(animator.gameObject)).AddTo(this);
+        Chapter = Instantiate(ChaptersSelections[Phase][SelectStoryData.Instance.id[id]]);
+        Chapter.name = "Chapter_" + SelectStoryData.Instance.id[id];
+    }
+    
+    // ストーリーのチャプターを見終わってページをめくったら情報リセット
+    public void ResetStoryInfo()
+    {
+        Phase++;
+        id = 0;
+        IsStory = false;
+        PlayAll = false;
+        storyText.transform.parent.gameObject.SetActive(false);
+        storyText.text = "";
+        StoryRepair.Instance.StoryRepairPanel.Activate();
+        Destroy(Chapter);
     }
 }

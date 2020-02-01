@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using KanekoUtilities;
+using MyStory.StoryRepair;
 
 [RequireComponent(typeof(BookRenderer))]
 public class BookPageChanger : MonoBehaviour
@@ -91,6 +92,8 @@ public class BookPageChanger : MonoBehaviour
 
     void UpdateMovePage(float rate)
     {
+        if (!StorySimulator.Instance.IsStory) return;
+        
         pageTransform.SetRotationZ(Mathf.Lerp(-89.0f, 90.0f, rate));
         // 紙芝居アニメーションしてます
         if (StorySimulator.Instance.Chapter && rate > 0) StorySimulator.Instance.Chapter.transform.GetChild(0).localScale = new Vector3(1 - 1 * rate, 1 - 1 * rate, 1 - 1 * rate);
@@ -106,7 +109,7 @@ public class BookPageChanger : MonoBehaviour
             temp = Mathf.Min(index + 1, pageTextures.Length - 1);
         }
         // 紙芝居を消す
-        if (!isReturn && StorySimulator.Instance.Chapter && StorySimulator.Instance.Chapter.transform.GetChild(0).localRotation.x <= 0) Destroy(StorySimulator.Instance.Chapter);
+        if (!isReturn && StorySimulator.Instance.Chapter && StorySimulator.Instance.Chapter.transform.GetChild(0).localRotation.x <= 0) StorySimulator.Instance.ResetStoryInfo();
         bookRenderer.SetTextrue(pageTextures[index].LeftTexture, pageTextures[index].RightTexture, pageTextures[temp].LeftTexture, pageTextures[temp].RightTexture);
         isReturn = false;
     }
