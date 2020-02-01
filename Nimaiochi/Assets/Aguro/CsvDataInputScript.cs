@@ -14,8 +14,18 @@ public class CsvDataInputScript : MonoBehaviour
     List<string[]> MystoryCsvDatas = new List<string[]>(); // CSVの中身を入れるリスト;
     List<string[]> CardsCsvDatas = new List<string[]>(); // CSVの中身を入れるリスト;
 
+    static CsvDataInputScript _instance = null;
+    public static CsvDataInputScript instance { get { return _instance; } }
+
+
     void Start()
     {
+        if (_instance == null)
+        {
+            // マネージャーリストにセット
+            _instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
         csvFile = Resources.Load("MYSTORY1") as TextAsset; // Resouces下のCSV読み込み
         StringReader reader = new StringReader(csvFile.text);
 
@@ -43,16 +53,14 @@ public class CsvDataInputScript : MonoBehaviour
         {
             for (int j = 0; j < MystoryWidth; j++)
             {
-                Debug.Log("MystoryCsvDatas["+i+"]["+j+"]="+MystoryCsvDatas[i][j]);
+                Debug.Log("MystoryCsvDatas[" + i + "][" + j + "]=" + MystoryCsvDatas[i][j]);
             }
         }
         for (int i = 0; i < CardsHeight; i++)
         {
             for (int j = 0; j < CardsWidth; j++)
             {
-                Debug.Log("CardsCsvDatas[" + i + "][" + j + "]="+CardsCsvDatas[i][j]);
-
-                Debug.Log(CardsCsvDatas[i][j]);
+                Debug.Log("CardsCsvDatas[" + i + "][" + j + "]=" + CardsCsvDatas[i][j]);
             }
         }
         // csvDatas[行][列]を指定して値を自由に取り出せる
