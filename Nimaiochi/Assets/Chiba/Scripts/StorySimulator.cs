@@ -12,6 +12,7 @@ public class StorySimulator : MonoBehaviour
     [SerializeField] private GameObject[] chapter4Selections;
     [SerializeField] private GameObject[] chapter5Selections;
     [SerializeField] private GameObject[] chapter6Selections;
+    [SerializeField] private GameObject[] ending;
     [SerializeField] private List<GameObject[]> chaptersSelections = new List<GameObject[]>();
     private int phase = 0;
     private int key = 0;
@@ -26,6 +27,7 @@ public class StorySimulator : MonoBehaviour
         chaptersSelections.Add(chapter4Selections);
         chaptersSelections.Add(chapter5Selections);
         chaptersSelections.Add(chapter6Selections);
+        chaptersSelections.Add(ending);
     }
 
     public void OnPushPlay()
