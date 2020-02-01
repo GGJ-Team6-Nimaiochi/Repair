@@ -8,6 +8,13 @@ public class DropArea : MonoBehaviour, IDropHandler
 {
     [SerializeField] public Text text;
 
+    private int arrayNo;
+
+    public void SetArrayNo(int arrayNo)
+    {
+        this.arrayNo = arrayNo;
+    }
+
     public void OnDrop(PointerEventData data)
     {
         Debug.Log(gameObject.name);
@@ -15,7 +22,6 @@ public class DropArea : MonoBehaviour, IDropHandler
         var dragObj = data.pointerDrag.GetComponent<DragManage>();
         if (dragObj != null)
         {
-            //dragObj.parentTransform = this.transform;
             Debug.Log(gameObject.name + "に" + data.pointerDrag.name + "をドロップ");
             text.text += dragObj.text.text;
             dragObj.DestroyDragObject();

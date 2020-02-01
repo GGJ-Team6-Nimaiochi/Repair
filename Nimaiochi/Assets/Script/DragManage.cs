@@ -3,15 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-
+using MyStory.StoryRepair;
 
 public class DragManage : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     [SerializeField] public Text text;
 
+    [HideInInspector] public PageContentData pageContentData;
+
     public Transform canvas;
     private GameObject dragObject;
 
+
+    public void SetPageContentData(PageContentData pageContentData)
+    {
+        this.pageContentData = null;
+        this.pageContentData = new PageContentData(pageContentData);
+    }
 
     public void OnBeginDrag(PointerEventData data)
     {
