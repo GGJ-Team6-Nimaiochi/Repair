@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UniRx;
 
 namespace MyStory.StoryRepair
 {
@@ -17,16 +19,35 @@ namespace MyStory.StoryRepair
         private List<GameObject> pageContentList;
         private List<GameObject> textContentList;
 
-        private int currentChapter = 0;
+        private int selectNum;
 
-        private int currentPageContent = 0;
-        private int currentTextContent = 0;
+        private int currentChapter;
+
+        private int currentPageContent;
+        private int currentTextContent;
 
         private void Start() // 後で消す
         {
+            currentChapter = 0;
+            currentPageContent = 0;
+            currentTextContent = 0;
+            selectNum = 0;
             CheckChapterTextData();
             CreatDropFildList();
             CreatPageList();
+            nextButton.OnClickAsObservable()
+                .Subscribe(_ =>
+                {
+                    if (currentPageContent == 0)
+                    {
+                        DestroyPage();
+                        AddChapter();
+                        CheckChapterTextData();
+                        CreatDropFildList();
+                        CreatPageList();
+                        nextButton.gameObject.SetActive(false);
+                    }
+                }).AddTo(this);
         }
 
         public void AddChapter()
@@ -36,24 +57,26 @@ namespace MyStory.StoryRepair
 
         private void CheckChapterTextData()
         {
-            for(int i = 0; i < CsvDataInputScript.Instance.MystoryCsvDatas[currentChapter].Length;i++)
+            for (int i = 0; i < CsvDataInputScript.Instance.MystoryCsvDatas[currentChapter].Length; i++)
             {
-                if(CsvDataInputScript.Instance.MystoryCsvDatas[currentChapter][i] == "END")
+                if (CsvDataInputScript.Instance.MystoryCsvDatas[currentChapter][i] == "END")
                 {
                     currentTextContent = i;
                     break;
                 }
-                currentTextContent = i;
+                currentTextContent = i - 1;
             }
 
-            for (int i = 0; i < CsvDataInputScript.Instance.CardsCsvDatas[currentChapter].Length; i++)
+            for (int j = 0; j < CsvDataInputScript.Instance.CardsCsvDatas[currentChapter].Length; j++)
             {
-                if (CsvDataInputScript.Instance.CardsCsvDatas[currentChapter][i] == "END")
+                if (CsvDataInputScript.Instance.CardsCsvDatas[currentChapter][j] == "END")
                 {
-                    currentPageContent = i;
+                    currentPageContent = j;
+                    if (j == 0)
+                        nextButton.gameObject.SetActive(true);
                     break;
                 }
-                currentPageContent = i;
+                currentPageContent = j - 1;
             }
         }
 
@@ -83,18 +106,38 @@ namespace MyStory.StoryRepair
             textContent.SetActive(false);
         }
 
-        public void DestroyPage()
+        public void DestroySelectText()
         {
-            foreach(var obj in pageContentList.ToArray())
+            foreach (var obj in pageContentList.ToArray())
             {
                 Destroy(obj);
             }
             pageContentList = null;
+        }
+
+        public void DestroyPage()
+        {
+            if(pageContentList != null)
+            {
+                foreach (var obj in pageContentList.ToArray())
+                {
+                    Destroy(obj);
+                }
+                pageContentList = null;
+            }
+           
             foreach (var obj in textContentList.ToArray())
             {
                 Destroy(obj);
             }
             textContentList = null;
+        }
+
+        public void SelectText()
+        {
+            selectNum++;
+            if(selectNum == currentTextContent)
+                nextButton.gameObject.SetActive(true);
         }
 
     }
