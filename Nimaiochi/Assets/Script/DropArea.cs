@@ -12,14 +12,13 @@ public class DropArea : MonoBehaviour, IDropHandler
     {
         Debug.Log(gameObject.name);
 
-        var dragObj = data.pointerDrag.GetComponent<PageContent>();
-        var baseDragObj = data.pointerDrag.GetComponent<DragManage>();
-        if (dragObj != null && baseDragObj != null)
+        var dragObj = data.pointerDrag.GetComponent<DragManage>();
+        if (dragObj != null)
         {
             //dragObj.parentTransform = this.transform;
             Debug.Log(gameObject.name + "に" + data.pointerDrag.name + "をドロップ");
             text.text += dragObj.text.text;
-            baseDragObj.DestroyDragObject();
+            dragObj.DestroyDragObject();
             Destroy(dragObj.gameObject);
         }
     }

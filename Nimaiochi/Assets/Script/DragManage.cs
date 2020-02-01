@@ -7,8 +7,10 @@ using UnityEngine.EventSystems;
 
 public class DragManage : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
+    [SerializeField] public Text text;
+
     public Transform canvas;
-    public GameObject dragObject;
+    private GameObject dragObject;
 
 
     public void OnBeginDrag(PointerEventData data)
@@ -18,7 +20,6 @@ public class DragManage : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     }
     public void OnDrag(PointerEventData data)
     {
-        Debug.Log("OnDrag" + data.position);
         dragObject.transform.position = data.position;
     }
     public void OnEndDrag(PointerEventData data)
