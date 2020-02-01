@@ -16,7 +16,10 @@ namespace MyStory.StoryRepair
         [SerializeField] GameObject textContent;
         [SerializeField] GameObject nonSelectTextContent;
         [SerializeField] Button nextButton;
-
+        [SerializeField] private GameObject uGuiButton3D;
+        [SerializeField] private KanekoUtilities.Panel stroyRepairPanel; 
+        [SerializeField] private StorySimulator stroySimulator; 
+        
         private List<GameObject> pageContentList;
         private List<GameObject> textContentList;
         private List<GameObject> nonSelectTextContentList;
@@ -215,10 +218,48 @@ namespace MyStory.StoryRepair
         public void SelectText()
         {
             selectNum++;
-            if(selectNum == currentTextContent)
+            if (selectNum == currentTextContent)
+            {
                 nextButton.gameObject.SetActive(true);
+                uGuiButton3D.SetActive(true);
+            }
         }
 
+        private int key = 0;
+        public void OnPushPlay()
+        {
+            try
+            {
+                switch (StorySimulator.Instance.Phase)
+                {
+                    case 0:
+                        StorySimulator.Instance.Chapter = Instantiate(StorySimulator.Instance.ChaptersSelections[0][0]);
+                        break;
+                    default:
+                        StorySimulator.Instance.Chapter = Instantiate(StorySimulator.Instance.ChaptersSelections[StorySimulator.Instance.Phase][SelectStoryData.Instance.id[key]]);
+                        break;
+                    
+                }
+
+                StorySimulator.Instance.IsStory = true;
+                StorySimulator.Instance.SetStoryText(key);
+                StorySimulator.Instance.Phase++;
+                key++;
+                stroyRepairPanel.Deactivate();
+                selectTextPoint = -1;
+                DestroyPage();
+                AddChapter();
+                CheckChapterTextData();
+                CreatNonSelectText();
+                CreatPageList();
+                uGuiButton3D.SetActive(false);
+                nextButton.gameObject.SetActive(false);
+            }
+            catch
+            {
+                Debug.LogError("Error");
+            }
+        }
     }
 
     public class PageContentData

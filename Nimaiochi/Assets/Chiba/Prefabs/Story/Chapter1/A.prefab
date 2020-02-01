@@ -254,7 +254,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3991216490292451138}
-  - component: {fileID: -348096244792715532}
+  - component: {fileID: 7879018961881495596}
   m_Layer: 0
   m_Name: A
   m_TagString: Untagged
@@ -277,7 +277,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
---- !u!114 &-348096244792715532
+--- !u!114 &7879018961881495596
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -286,14 +286,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 4735355944933191660}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 712b0f96116e5436da0780e37b2b2691, type: 3}
+  m_Script: {fileID: 11500000, guid: 20e9a10ec81a547018d03e9cb2b2f00a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  houseSprites: []
-  buta1HouseImage: {fileID: 0}
-  buta2HouseImage: {fileID: 0}
-  buta3HouseImage: {fileID: 0}
   animator: {fileID: 8689361142197218275}
+  HouseSprites:
+  - {fileID: 21300000, guid: 79df082b294144c5fa87fb6d1426b278, type: 3}
+  - {fileID: 21300000, guid: ca33182a39bcc430cb7b6a0b95a21017, type: 3}
+  - {fileID: 21300000, guid: de56c6811d5aa40729e464edf94cf811, type: 3}
+  - {fileID: 21300000, guid: 92472bfe4f7244974a7d3123088002af, type: 3}
+  - {fileID: 21300000, guid: 5b769d2b76fe74b1684592d24aad63eb, type: 3}
+  - {fileID: 21300000, guid: 5b769d2b76fe74b1684592d24aad63eb, type: 3}
+  houses:
+  - {fileID: 4026627506761776591}
+  - {fileID: 1729453307102740397}
+  - {fileID: 7196609284293903051}
 --- !u!1 &5059346831251752051
 GameObject:
   m_ObjectHideFlags: 0

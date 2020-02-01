@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using KanekoUtilities;
+using UniRx;
+using UniRx.Triggers;
 
 public class TitlePanel : Panel
 {
@@ -14,9 +16,15 @@ public class TitlePanel : Panel
     [SerializeField]
     AnimationCurve rotationCurve = null;
 
+    [SerializeField] private Panel storyRepairPanel;
+
     void Start()
     {
-        SwipeGetter.Instance.onTouchStart.AddListener((_)=> Deactivate());
+        this.UpdateAsObservable().Where(_ => Input.GetMouseButtonDown(0)).Take(1).Subscribe(_ =>
+        {
+            Deactivate();
+            storyRepairPanel.Activate();
+        }).AddTo(this);
     }
 
     public override void Activate()
