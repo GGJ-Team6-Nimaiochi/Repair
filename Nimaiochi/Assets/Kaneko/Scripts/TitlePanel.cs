@@ -14,6 +14,11 @@ public class TitlePanel : Panel
     [SerializeField]
     AnimationCurve rotationCurve = null;
 
+    void Start()
+    {
+        SwipeGetter.Instance.onTouchStart.AddListener((_)=> Deactivate());
+    }
+
     public override void Activate()
     {
         base.Activate();
