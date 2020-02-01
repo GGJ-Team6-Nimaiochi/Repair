@@ -8,9 +8,20 @@ using UniRx.Triggers;
 
 namespace MyStory.StoryRepair
 {
-
     public class StoryRepair : MonoBehaviour
     {
+        public enum CellType { Text, Select, SelectText, Lock }
+        public class Cell
+        {
+            public string ViewText;
+            public CellType Type;
+            public Cell(string viewText, CellType type)
+            {
+                ViewText = viewText;
+                Type = type;
+            }
+        }
+
         [SerializeField] GameObject PageParent;
         [SerializeField] GameObject pageContent;
         [SerializeField] GameObject textParent;
@@ -19,7 +30,7 @@ namespace MyStory.StoryRepair
         [SerializeField] Button nextButton;
         [SerializeField] private GameObject uGuiButton3D;
         [SerializeField] private StorySimulator stroySimulator; 
-
+        
         public static StoryRepair Instance;
         public KanekoUtilities.Panel StoryRepairPanel; 
 
@@ -29,45 +40,27 @@ namespace MyStory.StoryRepair
 
         private int selectTextPoint;
 
+        //選択肢を確定した数
         private int selectNum;
-
+        //選択肢を埋める場所の数
+        private int dropFildNum;
+        //チェックポイントのIndex
         private int currentChapter;
 
-        private int currentPageContent;
-        private int currentTextContent;
-        private int currentNonSelectTextContent;
+        Cell[] cells;
 
         private void Start() // 後で消す
         {
             Instance = this;
             currentChapter = 0;
-            InitNums();
-            CheckChapterTextData();
-            CreatNonSelectText();
-            CreatPageList();
+            Init();
+
             nextButton.OnClickAsObservable()
                 .Subscribe(_ =>
                 {
-                    if (selectTextPoint == -1)
-                    {
-                        InitNums();
-                        nextButton.gameObject.SetActive(false);
-                        DestroyPage();
-                        AddChapter();
-                        CheckChapterTextData();
-                        CreatNonSelectText();
-                        CreatPageList();
-                    }
-                    else
-                    {
-                        nextButton.gameObject.SetActive(false);
-                        selectTextPoint = -1;
-                        DestroyPage();
-                        AddChapter();
-                        CheckChapterTextData();
-                        CreatNonSelectText();
-                        CreatPageList();
-                    }
+                    nextButton.gameObject.SetActive(false);
+                    AddChapter();
+                    Init();
                 }).AddTo(this);
         }
 
@@ -76,153 +69,116 @@ namespace MyStory.StoryRepair
             currentChapter++;
         }
 
-        public void InitNums()
+        public void Init()
         {
-            currentPageContent = 0;
-            currentTextContent = 0;
             selectNum = 0;
-            selectTextPoint = -1;
-        }
 
-        private void CheckChapterTextData()
-        {
-            for (int i = 0; i < CsvDataInputScript.Instance.MystoryCsvDatas[currentChapter].Length; i++)
-            {
-                if(CsvDataInputScript.Instance.MystoryCsvDatas[currentChapter][i] == "SELECT")
-                {
-                    selectTextPoint = i;
-                }
+            DeleteContent();
 
-                if (CsvDataInputScript.Instance.MystoryCsvDatas[currentChapter][i] == "END")
-                {
-                    currentNonSelectTextContent = i;
-                    break;
-                }
-                currentNonSelectTextContent = i - 1;
-            }
+            ChapterTextDataToCells();
 
-            if (selectTextPoint == -1)
+            //選択肢が存在しなかったら
+            if(dropFildNum == 0)
             {
                 nextButton.gameObject.SetActive(true);
             }
 
-            for (int k = 0; k < CsvDataInputScript.Instance.SelectstoryCsvDatas[currentChapter].Length; k++)
-            {
-                if (CsvDataInputScript.Instance.SelectstoryCsvDatas[currentChapter][k] == "END")
-                {
-                    currentTextContent = k;
-                    break;
-                }
-                currentTextContent = k - 1;
-            }
+            CreatPageList(CsvDataInputScript.Instance.CardsCsvDatas[currentChapter].Length);
 
-            for (int j = 0; j < CsvDataInputScript.Instance.CardsCsvDatas[currentChapter].Length; j++)
-            {
-                if (CsvDataInputScript.Instance.CardsCsvDatas[currentChapter][j] == "END")
-                {
-                    currentPageContent = j;
-                    break;
-                }
-                currentPageContent = j - 1;
-            }
-        }
-
-        private void CreatPageList()
-        {
-            pageContentList = new List<GameObject>();
-            pageContent.SetActive(true);
-            for (int i = 0; i < currentPageContent; i++)
-            {
-                var page = Instantiate(pageContent, PageParent.transform);
-                page.transform.GetComponent<DragManage>().SetPageContentData(new PageContentData(CsvDataInputScript.Instance.CardsCsvDatas[currentChapter][i], currentChapter, i));
-                pageContentList.Add(page);
-            }
-            pageContent.SetActive(false);
-        }
-
-        //必ず、CreatNonSelectText()の中
-        private void CreatDropFildList()
-        {
-            textContentList = new List<GameObject>();
-            for (int i = 0; i < currentTextContent; i++)
-            {
-                var pagetext = Instantiate(textContent, textParent.transform);
-                pagetext.transform.GetComponent<DropArea>().SetData(i, CsvDataInputScript.Instance.SelectstoryCsvDatas[currentChapter][i], SelectText);
-                textContentList.Add(pagetext);
-            }
-            SelectStoryData.Instance.Init(currentTextContent);
-        }
-
-        private void CreatNonSelectText()
-        {
-            nonSelectTextContentList = new List<GameObject>();
             nonSelectTextContent.SetActive(true);
             textContent.SetActive(true);
-            for (int i = 0; i < currentNonSelectTextContent; i++)
+            var dropFildIndex = 0;
+            for(int i = 0 ; i < cells.Length ; i++)
             {
-                if (selectTextPoint == i)
+                if(cells[i].Type == CellType.Select || cells[i].Type == CellType.SelectText)
                 {
-                    CreatDropFildList();
+                    CreatDropFildList(dropFildIndex, cells[i].ViewText);
+                    dropFildIndex++;
                     continue;
                 }
                 var pagetext = Instantiate(nonSelectTextContent, textParent.transform);
                 pagetext.transform.GetComponent<Text>().text = CsvDataInputScript.Instance.MystoryCsvDatas[currentChapter][i];
-                nonSelectTextContentList.Add(pagetext);
             }
             nonSelectTextContent.SetActive(false);
             textContent.SetActive(false);
+
+
+            var storyData = SelectStoryData.Instance;
+            storyData.Init(cells.Length, currentChapter);
+            for(int i = 0 ; i < cells.Length ; i++)
+            {
+                storyData.SetData(i, cells[i].ViewText, -1);
+            }
         }
 
-        public void DestroySelectText()
+        private void DeleteContent()
         {
-            foreach (var obj in nonSelectTextContentList.ToArray())
+            var childCount = PageParent.transform.childCount;
+            for(int i = childCount - 1 ; i >= 0 ; i--)
             {
-                Destroy(obj);
+                Destroy(PageParent.transform.GetChild(i).gameObject);
             }
-            nonSelectTextContentList = null;
 
-            foreach (var obj in pageContentList.ToArray())
+            childCount = textParent.transform.childCount;
+            for(int i = childCount - 1 ; i >= 0 ; i--)
             {
-                Destroy(obj);
+                Destroy(textParent.transform.GetChild(i).gameObject);
             }
-            pageContentList = null;
         }
 
-        public void DestroyPage()
+        //テキストデータを読み込んでCellの配列へ変換
+        private void ChapterTextDataToCells()
         {
-            if (nonSelectTextContentList != null)
-            {
-                foreach (var obj in nonSelectTextContentList.ToArray())
-                {
-                    Destroy(obj);
-                }
-                nonSelectTextContentList = null;
-            }
+            var dataList = CsvDataInputScript.Instance.MystoryCsvDatas[currentChapter];
+            cells = new Cell[dataList.Length];
+            dropFildNum = 0;
 
-            if (pageContentList != null)
+            for(int i = 0 ; i < dataList.Length ; i++)
             {
-                foreach (var obj in pageContentList.ToArray())
-                {
-                    Destroy(obj);
-                }
-                pageContentList = null;
-            }
+                var data = dataList[i];
+                var type = CellType.Text;
 
-            if (textContentList != null)
-            {
-                foreach (var obj in textContentList.ToArray())
+                if(data.Contains("SELECT"))
                 {
-                    Destroy(obj);
+                    type = data == "SELECT" ? CellType.Select : CellType.SelectText;
+                    data = data.Replace("SELECT", "");
+                    dropFildNum++;
                 }
-                textContentList = null;
+                else if(data.Contains("<color"))
+                {
+                    type = CellType.Lock;
+                }
+                cells[i] = new Cell(data, type);
             }
-           
         }
 
+        //選択肢のカードを生成する
+        private void CreatPageList(int selectPointNum)
+        {
+            if(selectPointNum == 1) return;
+            pageContent.SetActive(true);
+            for(int i = 0 ; i < selectPointNum ; i++)
+            {
+                var page = Instantiate(pageContent, PageParent.transform);
+                page.transform.GetComponent<DragManage>().SetPageContentData(new PageContentData(CsvDataInputScript.Instance.CardsCsvDatas[currentChapter][i], currentChapter, i));
+            }
+            pageContent.SetActive(false);
+        }
+
+        //選択肢を入れる部分を生成
+        private void CreatDropFildList(int dropFildIndex, string text = "")
+        {
+            var pagetext = Instantiate(textContent, textParent.transform);
+            pagetext.transform.GetComponent<DropArea>().SetData(dropFildIndex, text, SelectText);
+        }
+
+        //選択肢をドロップした後の挙動
         public void SelectText()
         {
             selectNum++;
-            if (selectNum == currentTextContent)
+
+            //全て選択し終わったらNEXTを表示
+            if(selectNum >= dropFildNum)
             {
                 nextButton.gameObject.SetActive(true);
                 uGuiButton3D.SetActive(true);
@@ -252,11 +208,7 @@ namespace MyStory.StoryRepair
                 StorySimulator.Instance.SetStoryText(0);
                 StoryRepairPanel.Deactivate();
                 selectTextPoint = -1;
-                DestroyPage();
                 AddChapter();
-                CheckChapterTextData();
-                CreatNonSelectText();
-                CreatPageList();
                 nextButton.gameObject.SetActive(false);
             }
             catch
