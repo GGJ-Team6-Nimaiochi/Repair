@@ -635,12 +635,12 @@ MonoBehaviour:
   pageTextures:
   - LeftTexture: {fileID: 2800000, guid: c334bf4d8812843fe9cb6c4c6de97edb, type: 3}
     RightTexture: {fileID: 2800000, guid: 6b57cd291038c44e6925b5327fa0f5d0, type: 3}
-  - LeftTexture: {fileID: 2800000, guid: 62c63ff7ee364417aba718191b17749d, type: 3}
-    RightTexture: {fileID: 2800000, guid: 62c63ff7ee364417aba718191b17749d, type: 3}
-  - LeftTexture: {fileID: 2800000, guid: e17a9c87388ea43c9a4005ddc21fd2a2, type: 3}
-    RightTexture: {fileID: 2800000, guid: e17a9c87388ea43c9a4005ddc21fd2a2, type: 3}
-  - LeftTexture: {fileID: 2800000, guid: 95608ab18d5df460c929c4bdd6de7045, type: 3}
-    RightTexture: {fileID: 2800000, guid: 95608ab18d5df460c929c4bdd6de7045, type: 3}
+  - LeftTexture: {fileID: 2800000, guid: c334bf4d8812843fe9cb6c4c6de97edb, type: 3}
+    RightTexture: {fileID: 2800000, guid: 6b57cd291038c44e6925b5327fa0f5d0, type: 3}
+  - LeftTexture: {fileID: 2800000, guid: c334bf4d8812843fe9cb6c4c6de97edb, type: 3}
+    RightTexture: {fileID: 2800000, guid: 6b57cd291038c44e6925b5327fa0f5d0, type: 3}
+  - LeftTexture: {fileID: 2800000, guid: c334bf4d8812843fe9cb6c4c6de97edb, type: 3}
+    RightTexture: {fileID: 2800000, guid: 6b57cd291038c44e6925b5327fa0f5d0, type: 3}
   pageTransform: {fileID: 1390475936}
   swipeSpeed: -5
 --- !u!114 &385336229
@@ -1380,7 +1380,7 @@ MonoBehaviour:
   chapter4Selections:
   - {fileID: 7993543099324400210, guid: cb13485c6c52842d29b8ada8aeb2b37a, type: 3}
   chapter5Selections:
-  - {fileID: 0}
+  - {fileID: 7993543099324400210, guid: 5663d28b478a44edeabd25e18bc40bae, type: 3}
   chapter6Selections:
   - {fileID: 0}
 --- !u!4 &1157136929

@@ -28,7 +28,8 @@ public class BookPageChanger : MonoBehaviour
     int currentPageIndex = 0;
     float currentRate;
     bool isAnimating;
-
+    private bool isReturn = false;
+    
     void Awake()
     {
         bookRenderer = GetComponent<BookRenderer>();
@@ -52,10 +53,15 @@ public class BookPageChanger : MonoBehaviour
 
         SwipeGetter.Instance.onTouchEnd.AddListener((_) =>
         {
-            if(currentRate < 0.2f)
+            if (currentRate < 0.2f)
+            {
+                isReturn = true;
                 StartCoroutine(ChangePageAnimation(0.0f, currentPageIndex));
+            }
             else
+            {
                 StartCoroutine(ChangePageAnimation(1.0f, currentPageIndex + 1));
+            }
         });
     }
 
@@ -94,9 +100,15 @@ public class BookPageChanger : MonoBehaviour
     void UpdateTexture(int index)
     {
         var temp = Mathf.Min(index + 1, pageTextures.Length - 1);
+        if (index + 1 > pageTextures.Length - 1)
+        {
+            index = 0;
+            temp = Mathf.Min(index + 1, pageTextures.Length - 1);
+        }
         // 紙芝居を消す
-        if (StorySimulator.Chapter && StorySimulator.Chapter.transform.GetChild(0).localRotation.x <= 0) Destroy(StorySimulator.Chapter);
+        if (!isReturn && StorySimulator.Chapter && StorySimulator.Chapter.transform.GetChild(0).localRotation.x <= 0) Destroy(StorySimulator.Chapter);
         bookRenderer.SetTextrue(pageTextures[index].LeftTexture, pageTextures[index].RightTexture, pageTextures[temp].LeftTexture, pageTextures[temp].RightTexture);
+        isReturn = false;
     }
 
     int ClampPageIndex(int index)

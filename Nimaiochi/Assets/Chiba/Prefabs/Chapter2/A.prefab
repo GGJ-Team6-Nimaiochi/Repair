@@ -242,6 +242,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7993543098509781524}
+  - component: {fileID: 7786902864990464561}
   m_Layer: 0
   m_Name: A_1
   m_TagString: Untagged
@@ -257,13 +258,32 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7993543098509781527}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.25, z: -0.25}
+  m_LocalPosition: {x: 0, y: -1.78, z: -0.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7993543098482386647}
   m_Father: {fileID: 7993543099324400211}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &7786902864990464561
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7993543098509781527}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 542aa7ee7b9354078bccba88feb18568, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7993543098569638241
 GameObject:
   m_ObjectHideFlags: 0
@@ -373,6 +393,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7993543099324400211}
+  - component: {fileID: 1808555439}
   m_Layer: 0
   m_Name: A
   m_TagString: Untagged
@@ -395,3 +416,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
+--- !u!114 &1808555439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7993543099324400210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6170741e9a2849f384a13a119a75f5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  houseSprites: []
+  buta1HouseImage: {fileID: 0}
+  buta2HouseImage: {fileID: 0}
+  buta3HouseImage: {fileID: 0}
+  animator: {fileID: 7786902864990464561}

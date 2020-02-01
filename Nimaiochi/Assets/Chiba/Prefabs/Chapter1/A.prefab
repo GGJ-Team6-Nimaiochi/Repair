@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1537676975510504160}
+  - component: {fileID: 8689361142197218275}
   m_Layer: 0
   m_Name: A_1
   m_TagString: Untagged
@@ -33,6 +34,25 @@ Transform:
   m_Father: {fileID: 3991216490292451138}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &8689361142197218275
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2176708294464052492}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 542aa7ee7b9354078bccba88feb18568, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3605287815991922325
 GameObject:
   m_ObjectHideFlags: 0
@@ -44,7 +64,7 @@ GameObject:
   - component: {fileID: 3232135053703117483}
   - component: {fileID: 1729453307102740397}
   m_Layer: 8
-  m_Name: tree_house
+  m_Name: house
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -156,7 +176,7 @@ GameObject:
   - component: {fileID: 1299746198982988761}
   - component: {fileID: 4026627506761776591}
   m_Layer: 8
-  m_Name: wara_house
+  m_Name: house
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -234,6 +254,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3991216490292451138}
+  - component: {fileID: -348096244792715532}
   m_Layer: 0
   m_Name: A
   m_TagString: Untagged
@@ -256,6 +277,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
+--- !u!114 &-348096244792715532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4735355944933191660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 712b0f96116e5436da0780e37b2b2691, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  houseSprites: []
+  buta1HouseImage: {fileID: 0}
+  buta2HouseImage: {fileID: 0}
+  buta3HouseImage: {fileID: 0}
+  animator: {fileID: 8689361142197218275}
 --- !u!1 &5059346831251752051
 GameObject:
   m_ObjectHideFlags: 0
@@ -732,7 +770,7 @@ GameObject:
   - component: {fileID: 2162341840259845725}
   - component: {fileID: 7196609284293903051}
   m_Layer: 8
-  m_Name: renga_house
+  m_Name: house
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -790,7 +828,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 21300000, guid: ca33182a39bcc430cb7b6a0b95a21017, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 79df082b294144c5fa87fb6d1426b278, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
