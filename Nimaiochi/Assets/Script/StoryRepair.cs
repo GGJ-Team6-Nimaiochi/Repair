@@ -21,13 +21,17 @@ namespace MyStory.StoryRepair
 
         private int selectNum;
 
-        private int currentChapter = 0;
+        private int currentChapter;
 
-        private int currentPageContent = 0;
-        private int currentTextContent = 0;
+        private int currentPageContent;
+        private int currentTextContent;
 
         private void Start() // 後で消す
         {
+            currentChapter = 0;
+            currentPageContent = 0;
+            currentTextContent = 0;
+            selectNum = 0;
             CheckChapterTextData();
             CreatDropFildList();
             CreatPageList();
@@ -41,6 +45,7 @@ namespace MyStory.StoryRepair
                         CheckChapterTextData();
                         CreatDropFildList();
                         CreatPageList();
+                        nextButton.gameObject.SetActive(false);
                     }
                 }).AddTo(this);
         }
@@ -59,7 +64,7 @@ namespace MyStory.StoryRepair
                     currentTextContent = i;
                     break;
                 }
-                currentTextContent = i--;
+                currentTextContent = i - 1;
             }
 
             for (int j = 0; j < CsvDataInputScript.Instance.CardsCsvDatas[currentChapter].Length; j++)
@@ -71,7 +76,7 @@ namespace MyStory.StoryRepair
                         nextButton.gameObject.SetActive(true);
                     break;
                 }
-                currentPageContent = j--;
+                currentPageContent = j - 1;
             }
         }
 

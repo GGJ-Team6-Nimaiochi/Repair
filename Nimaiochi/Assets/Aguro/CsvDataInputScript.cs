@@ -18,7 +18,7 @@ public class CsvDataInputScript : MonoBehaviour
     public static CsvDataInputScript Instance { get { return _instance; } }
 
 
-    void Awake()
+    void Start()
     {
         if (_instance == null)
         {
