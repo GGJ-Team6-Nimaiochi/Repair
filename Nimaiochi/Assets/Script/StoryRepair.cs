@@ -213,7 +213,7 @@ namespace MyStory.StoryRepair
                 StoryRepairPanel.Deactivate();
                 selectTextPoint = -1;
                 AddChapter();
-                Init();
+                //Init();
                 nextButton.gameObject.SetActive(false);
             }
             catch
