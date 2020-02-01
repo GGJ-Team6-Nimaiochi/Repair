@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using MyStory.StoryRepair;
+using KanekoUtilities;
 
 public class DragManage : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
@@ -26,9 +27,11 @@ public class DragManage : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     {
         CreateDragObject();
         dragObject.transform.position = data.position;
+        AudioManager.Instance.PlayOneShot("ClickCardSound");
     }
     public void OnDrag(PointerEventData data)
     {
+        
         dragObject.transform.position = data.position;
     }
     public void OnEndDrag(PointerEventData data)
@@ -40,6 +43,7 @@ public class DragManage : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 
     public void DestroyDragObject()
     {
+        AudioManager.Instance.PlayOneShot("PutCardSound");
         Destroy(dragObject);
     }
 
