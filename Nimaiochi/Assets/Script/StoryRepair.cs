@@ -14,10 +14,14 @@ namespace MyStory.StoryRepair
         [SerializeField] GameObject pageContent;
         [SerializeField] GameObject textParent;
         [SerializeField] GameObject textContent;
+        [SerializeField] GameObject nonSelectTextContent;
         [SerializeField] Button nextButton;
 
         private List<GameObject> pageContentList;
         private List<GameObject> textContentList;
+        private List<GameObject> nonSelectTextContentList;
+
+        private int selectTextPoint;
 
         private int selectNum;
 
@@ -25,6 +29,7 @@ namespace MyStory.StoryRepair
 
         private int currentPageContent;
         private int currentTextContent;
+        private int currentNonSelectTextContent;
 
         private void Start() // 後で消す
         {
@@ -32,20 +37,21 @@ namespace MyStory.StoryRepair
             currentPageContent = 0;
             currentTextContent = 0;
             selectNum = 0;
+            selectTextPoint = -1;
             CheckChapterTextData();
-            CreatDropFildList();
+            CreatNonSelectText();
             CreatPageList();
             nextButton.OnClickAsObservable()
                 .Subscribe(_ =>
                 {
-                    if (currentPageContent == 0)
+                    if (selectTextPoint == -1)
                     {
+                        nextButton.gameObject.SetActive(false);
                         DestroyPage();
                         AddChapter();
                         CheckChapterTextData();
-                        CreatDropFildList();
+                        CreatNonSelectText();
                         CreatPageList();
-                        nextButton.gameObject.SetActive(false);
                     }
                 }).AddTo(this);
         }
@@ -59,12 +65,32 @@ namespace MyStory.StoryRepair
         {
             for (int i = 0; i < CsvDataInputScript.Instance.MystoryCsvDatas[currentChapter].Length; i++)
             {
+                if(CsvDataInputScript.Instance.MystoryCsvDatas[currentChapter][i] == "SELECT")
+                {
+                    selectTextPoint = i;
+                }
+
                 if (CsvDataInputScript.Instance.MystoryCsvDatas[currentChapter][i] == "END")
                 {
-                    currentTextContent = i;
+                    currentNonSelectTextContent = i;
                     break;
                 }
-                currentTextContent = i - 1;
+                currentNonSelectTextContent = i - 1;
+            }
+
+            if (selectTextPoint == -1)
+            {
+                nextButton.gameObject.SetActive(true);
+            }
+
+            for (int k = 0; k < CsvDataInputScript.Instance.SelectstoryCsvDatas[currentChapter].Length; k++)
+            {
+                if (CsvDataInputScript.Instance.SelectstoryCsvDatas[currentChapter][k] == "END")
+                {
+                    currentTextContent = k;
+                    break;
+                }
+                currentTextContent = k - 1;
             }
 
             for (int j = 0; j < CsvDataInputScript.Instance.CardsCsvDatas[currentChapter].Length; j++)
@@ -72,8 +98,6 @@ namespace MyStory.StoryRepair
                 if (CsvDataInputScript.Instance.CardsCsvDatas[currentChapter][j] == "END")
                 {
                     currentPageContent = j;
-                    if (j == 0)
-                        nextButton.gameObject.SetActive(true);
                     break;
                 }
                 currentPageContent = j - 1;
@@ -93,21 +117,46 @@ namespace MyStory.StoryRepair
             pageContent.SetActive(false);
         }
 
+        //必ず、CreatNonSelectText()の中
         private void CreatDropFildList()
         {
             textContentList = new List<GameObject>();
-            textContent.SetActive(true);
             for (int i = 0; i < currentTextContent; i++)
             {
                 var pagetext = Instantiate(textContent, textParent.transform);
-                pagetext.transform.GetComponent<DropArea>().SetData(i, CsvDataInputScript.Instance.MystoryCsvDatas[currentChapter][i]);
+                pagetext.transform.GetComponent<DropArea>().SetData(i, CsvDataInputScript.Instance.SelectstoryCsvDatas[currentChapter][i]);
                 textContentList.Add(pagetext);
             }
+        }
+
+        private void CreatNonSelectText()
+        {
+            nonSelectTextContentList = new List<GameObject>();
+            nonSelectTextContent.SetActive(true);
+            textContent.SetActive(true);
+            for (int i = 0; i < currentNonSelectTextContent; i++)
+            {
+                if (selectTextPoint == i)
+                {
+                    CreatDropFildList();
+                    continue;
+                }
+                var pagetext = Instantiate(nonSelectTextContent, textParent.transform);
+                pagetext.transform.GetComponent<Text>().text = CsvDataInputScript.Instance.MystoryCsvDatas[currentChapter][i];
+                nonSelectTextContentList.Add(pagetext);
+            }
+            nonSelectTextContent.SetActive(false);
             textContent.SetActive(false);
         }
 
         public void DestroySelectText()
         {
+            foreach (var obj in nonSelectTextContentList.ToArray())
+            {
+                Destroy(obj);
+            }
+            nonSelectTextContentList = null;
+
             foreach (var obj in pageContentList.ToArray())
             {
                 Destroy(obj);
@@ -117,7 +166,16 @@ namespace MyStory.StoryRepair
 
         public void DestroyPage()
         {
-            if(pageContentList != null)
+            if (nonSelectTextContentList != null)
+            {
+                foreach (var obj in nonSelectTextContentList.ToArray())
+                {
+                    Destroy(obj);
+                }
+                nonSelectTextContentList = null;
+            }
+
+            if (pageContentList != null)
             {
                 foreach (var obj in pageContentList.ToArray())
                 {
@@ -125,12 +183,16 @@ namespace MyStory.StoryRepair
                 }
                 pageContentList = null;
             }
-           
-            foreach (var obj in textContentList.ToArray())
+
+            if (textContentList != null)
             {
-                Destroy(obj);
+                foreach (var obj in textContentList.ToArray())
+                {
+                    Destroy(obj);
+                }
+                textContentList = null;
             }
-            textContentList = null;
+           
         }
 
         public void SelectText()

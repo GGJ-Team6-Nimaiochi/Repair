@@ -8,10 +8,12 @@ public class CsvDataInputScript : MonoBehaviour
 
     TextAsset csvFile; // CSVファイル
     public int MystoryHeight; // CSVの行数
+    public int SelectstoryHeight; // CSVの行数
     public int CardsHeight; // CSVの行数
     public int MystoryWidth; // Debug.Logで表示するCSVの列数(自分で設定しなければならないです)
     public int CardsWidth; // Debug.Logで表示するCSVの列数(自分で設定しなければならないです)
     public List<string[]> MystoryCsvDatas = new List<string[]>(); // CSVの中身を入れるリスト;
+    public List<string[]> SelectstoryCsvDatas = new List<string[]>(); // CSVの中身を入れるリスト;
     public List<string[]> CardsCsvDatas = new List<string[]>(); // CSVの中身を入れるリスト;
 
     static CsvDataInputScript _instance = null;
@@ -38,7 +40,7 @@ public class CsvDataInputScript : MonoBehaviour
             MystoryHeight++;
         }
 
-        csvFile = Resources.Load("CARDS1") as TextAsset; // Resouces下のCSV読み込み
+        csvFile = Resources.Load("SELECTSTORY1") as TextAsset; // Resouces下のCSV読み込み
         StringReader reader2 = new StringReader(csvFile.text);
 
         // , で分割しつつ一行ずつ読み込み
@@ -46,6 +48,18 @@ public class CsvDataInputScript : MonoBehaviour
         while (reader2.Peek() > -1) // reader.Peaekが0になるまで繰り返す
         {
             string line = reader2.ReadLine(); // 一行ずつ読み込み
+            SelectstoryCsvDatas.Add(line.Split(',')); // , 区切りでリストに追加
+            SelectstoryHeight++;
+        }
+
+        csvFile = Resources.Load("CARDS1") as TextAsset; // Resouces下のCSV読み込み
+        StringReader reader3 = new StringReader(csvFile.text);
+
+        // , で分割しつつ一行ずつ読み込み
+        // リストに追加していく
+        while (reader3.Peek() > -1) // reader.Peaekが0になるまで繰り返す
+        {
+            string line = reader3.ReadLine(); // 一行ずつ読み込み
             CardsCsvDatas.Add(line.Split(',')); // , 区切りでリストに追加
             CardsHeight++; // 行数加算
         }
