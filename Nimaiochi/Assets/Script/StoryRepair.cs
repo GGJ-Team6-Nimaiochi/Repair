@@ -108,6 +108,10 @@ namespace MyStory.StoryRepair
             for(int i = 0 ; i < cells.Length ; i++)
             {
                 storyData.SetData(i, cells[i].ViewText, -1);
+                if(cells[i].Type == CellType.Lock)
+                {
+                    storyData.SetID(i, CsvDataInputScript.Instance.CardsCsvDatas[currentChapter].Length);
+                }
             }
         }
 
