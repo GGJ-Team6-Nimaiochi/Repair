@@ -34,10 +34,7 @@ namespace MyStory.StoryRepair
         private void Start() // 後で消す
         {
             currentChapter = 0;
-            currentPageContent = 0;
-            currentTextContent = 0;
-            selectNum = 0;
-            selectTextPoint = -1;
+            InitNums();
             CheckChapterTextData();
             CreatNonSelectText();
             CreatPageList();
@@ -46,7 +43,18 @@ namespace MyStory.StoryRepair
                 {
                     if (selectTextPoint == -1)
                     {
+                        InitNums();
                         nextButton.gameObject.SetActive(false);
+                        DestroyPage();
+                        AddChapter();
+                        CheckChapterTextData();
+                        CreatNonSelectText();
+                        CreatPageList();
+                    }
+                    else
+                    {
+                        nextButton.gameObject.SetActive(false);
+                        selectTextPoint = -1;
                         DestroyPage();
                         AddChapter();
                         CheckChapterTextData();
@@ -59,6 +67,14 @@ namespace MyStory.StoryRepair
         public void AddChapter()
         {
             currentChapter++;
+        }
+
+        public void InitNums()
+        {
+            currentPageContent = 0;
+            currentTextContent = 0;
+            selectNum = 0;
+            selectTextPoint = -1;
         }
 
         private void CheckChapterTextData()
@@ -124,9 +140,10 @@ namespace MyStory.StoryRepair
             for (int i = 0; i < currentTextContent; i++)
             {
                 var pagetext = Instantiate(textContent, textParent.transform);
-                pagetext.transform.GetComponent<DropArea>().SetData(i, CsvDataInputScript.Instance.SelectstoryCsvDatas[currentChapter][i]);
+                pagetext.transform.GetComponent<DropArea>().SetData(i, CsvDataInputScript.Instance.SelectstoryCsvDatas[currentChapter][i], SelectText);
                 textContentList.Add(pagetext);
             }
+            SelectStoryData.Instance.Init(currentTextContent);
         }
 
         private void CreatNonSelectText()

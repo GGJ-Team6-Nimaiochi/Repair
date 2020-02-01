@@ -7,14 +7,14 @@ public class CsvDataInputScript : MonoBehaviour
 {
 
     TextAsset csvFile; // CSVファイル
-    public int MystoryHeight; // CSVの行数
-    public int SelectstoryHeight; // CSVの行数
-    public int CardsHeight; // CSVの行数
-    public int MystoryWidth; // Debug.Logで表示するCSVの列数(自分で設定しなければならないです)
-    public int CardsWidth; // Debug.Logで表示するCSVの列数(自分で設定しなければならないです)
-    public List<string[]> MystoryCsvDatas = new List<string[]>(); // CSVの中身を入れるリスト;
-    public List<string[]> SelectstoryCsvDatas = new List<string[]>(); // CSVの中身を入れるリスト;
-    public List<string[]> CardsCsvDatas = new List<string[]>(); // CSVの中身を入れるリスト;
+    [HideInInspector] public int MystoryHeight; // CSVの行数
+    [HideInInspector] public int SelectstoryHeight; // CSVの行数
+    [HideInInspector] public int CardsHeight; // CSVの行数
+    [HideInInspector] public int MystoryWidth; // Debug.Logで表示するCSVの列数(自分で設定しなければならないです)
+    [HideInInspector] public int CardsWidth; // Debug.Logで表示するCSVの列数(自分で設定しなければならないです)
+    [HideInInspector] public List<string[]> MystoryCsvDatas = new List<string[]>(); // CSVの中身を入れるリスト;
+    [HideInInspector] public List<string[]> SelectstoryCsvDatas = new List<string[]>(); // CSVの中身を入れるリスト;
+    [HideInInspector] public List<string[]> CardsCsvDatas = new List<string[]>(); // CSVの中身を入れるリスト;
 
     static CsvDataInputScript _instance = null;
     public static CsvDataInputScript Instance { get { return _instance; } }

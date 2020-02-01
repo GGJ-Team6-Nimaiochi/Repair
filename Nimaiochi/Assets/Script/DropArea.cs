@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,11 +10,13 @@ public class DropArea : MonoBehaviour, IDropHandler
     [SerializeField] public Text text;
 
     private int arrayNo;
+    private Action endAction;
 
-    public void SetData(int arrayNo,string text)
+    public void SetData(int arrayNo,string text,Action endAction)
     {
         this.arrayNo = arrayNo;
         this.text.text = text;
+        this.endAction = endAction;
     }
 
     public void OnDrop(PointerEventData data)
@@ -25,8 +28,11 @@ public class DropArea : MonoBehaviour, IDropHandler
         {
             Debug.Log(gameObject.name + "に" + data.pointerDrag.name + "をドロップ");
             text.text += dragObj.text.text;
+            SelectStoryData.Instance.SetData(arrayNo, text.text, dragObj.pageContentData.chapter, dragObj.pageContentData.id);
             dragObj.DestroyDragObject();
             Destroy(dragObj.gameObject);
+            endAction();
+            this.enabled = false;
         }
     }
 }
