@@ -6,19 +6,27 @@ using KanekoUtilities;
 [RequireComponent(typeof(BookRenderer))]
 public class BookPageChanger : MonoBehaviour
 {
+    [System.Serializable]
+    class PageTexture
+    {
+        public Texture2D LeftTexture;
+        public Texture2D RightTexture;
+    }
+
     [SerializeField]
-    Texture2D[] pageTextures = null;
+    PageTexture[] pageTextures = null;
 
     [SerializeField]
     Transform pageTransform = null;
 
     [SerializeField]
-    UGUIButton rightButton = null;
+    float swipeSpeed = 0.02f;
 
     BookRenderer bookRenderer = null;
 
     int maxPageIndex = 3;
     int currentPageIndex = 0;
+    float currentRate;
     bool isAnimating;
 
     void Awake()
@@ -28,9 +36,27 @@ public class BookPageChanger : MonoBehaviour
 
     void Start()
     {
-        rightButton.OnClickEvent.AddListener(() => NextPage());
-
         Init();
+
+        SwipeGetter.Instance.onTouchStart.AddListener((_) =>
+        {
+            currentRate = 0.0f;
+        });
+
+        SwipeGetter.Instance.onSwipe.AddListener((vec) =>
+        {
+            currentRate += vec.x * swipeSpeed * Time.deltaTime * 0.01f;
+            currentRate = Mathf.Clamp01(currentRate);
+            UpdateMovePage(currentRate);
+        });
+
+        SwipeGetter.Instance.onTouchEnd.AddListener((_) =>
+        {
+            if(currentRate < 0.2f)
+                StartCoroutine(ChangePageAnimation(0.0f, currentPageIndex));
+            else
+                StartCoroutine(ChangePageAnimation(1.0f, currentPageIndex + 1));
+        });
     }
 
     public void Init()
@@ -38,50 +64,35 @@ public class BookPageChanger : MonoBehaviour
         UpdateTexture(0);
     }
 
-    public void ChangePage(int pageIndex)
-    {
-        if(currentPageIndex == pageIndex) return;
-        if(isAnimating) return;
-
-        StartCoroutine(ChangePageAnimation(pageIndex));
-    }
-
-    IEnumerator ChangePageAnimation(int next)
+    IEnumerator ChangePageAnimation(float targetRate, int pageIndex)
     {
         isAnimating = true;
-        yield return KKUtilities.FloatLerp(1.0f, (t) =>
+        var start = currentRate;
+        //t = s / d;
+        var duration =  Mathf.Abs(start - targetRate) / 1.0f;
+
+        yield return KKUtilities.FloatLerp(duration, (t) =>
         {
-            pageTransform.SetRotationZ(Mathf.Lerp(-89.0f, 0.0f, t));
+            UpdateMovePage(Mathf.Lerp(start, targetRate, t));
         });
 
-        yield return KKUtilities.FloatLerp(1.0f, (t) =>
-        {
-            pageTransform.SetRotationZ(Mathf.Lerp(0.0f, 90.0f, t));
-        });
-
-        currentPageIndex = next;
-        pageTransform.SetRotationZ(-89.0f);
+        currentPageIndex = pageIndex;
         UpdateTexture(currentPageIndex);
+        UpdateMovePage(0.0f);
+
         isAnimating = false;
+    }
+
+    void UpdateMovePage(float rate)
+    {
+        pageTransform.SetRotationZ(Mathf.Lerp(-89.0f, 90.0f, rate));
     }
 
     void UpdateTexture(int index)
     {
-        var temp = Mathf.Min(index + 1, pageTextures.Length -1);
+        var temp = Mathf.Min(index + 1, pageTextures.Length - 1);
 
-        bookRenderer.SetTextrue(pageTextures[index], pageTextures[index], pageTextures[temp], pageTextures[temp]);
-    }
-
-    void NextPage()
-    {
-        var index = ClampPageIndex(currentPageIndex + 1);
-        ChangePage(index);
-    }
-
-    void BackPage()
-    {
-        var index = ClampPageIndex(currentPageIndex - 1);
-        ChangePage(index);
+        bookRenderer.SetTextrue(pageTextures[index].LeftTexture, pageTextures[index].RightTexture, pageTextures[temp].LeftTexture, pageTextures[temp].RightTexture);
     }
 
     int ClampPageIndex(int index)

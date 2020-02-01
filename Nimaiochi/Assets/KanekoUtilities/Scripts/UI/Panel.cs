@@ -23,9 +23,8 @@ namespace KanekoUtilities
 
         protected virtual void Awake()
         {
-            image.gameObject.SetActive(activeOnAwake);
-            container.gameObject.SetActive(activeOnAwake);
             SetAnimation();
+            if(activeOnAwake) Activate();
         }
 
         protected virtual void SetAnimation()
