@@ -271,6 +271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4369144bde0d8894aa151bad66580f9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  text: {fileID: 0}
 --- !u!114 &389342676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -888,3 +889,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PageParent: {fileID: 1332846183}
   pageContent: {fileID: 1317798438}
+  textParent: {fileID: 956697765}
+  textContent: {fileID: 389342673}

@@ -18,7 +18,7 @@ public class DropArea : MonoBehaviour, IDropHandler
         {
             //dragObj.parentTransform = this.transform;
             Debug.Log(gameObject.name + "に" + data.pointerDrag.name + "をドロップ");
-
+            text.text += dragObj.text.text;
             baseDragObj.DestroyDragObject();
             Destroy(dragObj.gameObject);
         }

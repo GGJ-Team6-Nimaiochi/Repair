@@ -6,7 +6,7 @@ using UniRx;
 
 public class PageContent : MonoBehaviour
 {
-    [SerializeField] Text clause;
+    [SerializeField] public Text text;
 
     public void Start()
     {
