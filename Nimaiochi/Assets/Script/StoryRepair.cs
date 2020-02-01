@@ -211,15 +211,21 @@ namespace MyStory.StoryRepair
                 StorySimulator.Instance.IsStory = true;
                 StorySimulator.Instance.SetStoryText(0);
                 StoryRepairPanel.Deactivate();
-                selectTextPoint = -1;
-                AddChapter();
-                //Init();
+                StorySimulator.Instance.PageEndAction = NextPage;
                 nextButton.gameObject.SetActive(false);
             }
             catch
             {
                 Debug.LogError("Error");
             }
+        }
+
+        public void NextPage()
+        {
+            selectTextPoint = -1;
+            AddChapter();
+            Init();
+            StorySimulator.Instance.PageEndAction = null;
         }
     }
 

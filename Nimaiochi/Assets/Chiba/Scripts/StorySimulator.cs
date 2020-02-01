@@ -13,6 +13,7 @@ public class StorySimulator : MonoBehaviour
     [HideInInspector] public int Phase = 0;
     [HideInInspector] public Sprite[] SelectHouses = new Sprite[3];
     [HideInInspector] public GameObject Chapter = null;
+    [HideInInspector] public Action PageEndAction = null;
 
     [SerializeField] private GameObject[] chapter1Selections;
     [SerializeField] private GameObject[] chapter2Selections;
@@ -27,7 +28,7 @@ public class StorySimulator : MonoBehaviour
     public List<GameObject[]> ChaptersSelections = new List<GameObject[]>();
     public static StorySimulator Instance = null;
     private int id = 0;
-    
+
     private void Awake()
     {
         if (!Instance) Instance = this;
@@ -50,7 +51,9 @@ public class StorySimulator : MonoBehaviour
         if (key >= SelectStoryData.Instance.text.Length)
         {
             storyText.text = "(ページをめくってね！)";
-            if(Chapter)Destroy(Chapter.transform.GetChild(0).GetComponent<Animator>());
+            if (PageEndAction != null)
+                PageEndAction();
+            if (Chapter)Destroy(Chapter.transform.GetChild(0).GetComponent<Animator>());
             return;
         }
         
