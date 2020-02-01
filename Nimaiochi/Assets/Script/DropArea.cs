@@ -10,9 +10,10 @@ public class DropArea : MonoBehaviour, IDropHandler
 
     private int arrayNo;
 
-    public void SetArrayNo(int arrayNo)
+    public void SetData(int arrayNo,string text)
     {
         this.arrayNo = arrayNo;
+        this.text.text = text;
     }
 
     public void OnDrop(PointerEventData data)

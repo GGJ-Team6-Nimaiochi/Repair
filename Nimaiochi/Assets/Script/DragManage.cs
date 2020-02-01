@@ -19,6 +19,7 @@ public class DragManage : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     {
         this.pageContentData = null;
         this.pageContentData = new PageContentData(pageContentData);
+        this.text.text = pageContentData.text;
     }
 
     public void OnBeginDrag(PointerEventData data)

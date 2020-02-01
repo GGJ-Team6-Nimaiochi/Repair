@@ -11,11 +11,11 @@ public class CsvDataInputScript : MonoBehaviour
     public int CardsHeight; // CSVの行数
     public int MystoryWidth; // Debug.Logで表示するCSVの列数(自分で設定しなければならないです)
     public int CardsWidth; // Debug.Logで表示するCSVの列数(自分で設定しなければならないです)
-    List<string[]> MystoryCsvDatas = new List<string[]>(); // CSVの中身を入れるリスト;
-    List<string[]> CardsCsvDatas = new List<string[]>(); // CSVの中身を入れるリスト;
+    public List<string[]> MystoryCsvDatas = new List<string[]>(); // CSVの中身を入れるリスト;
+    public List<string[]> CardsCsvDatas = new List<string[]>(); // CSVの中身を入れるリスト;
 
     static CsvDataInputScript _instance = null;
-    public static CsvDataInputScript instance { get { return _instance; } }
+    public static CsvDataInputScript Instance { get { return _instance; } }
 
 
     void Start()
