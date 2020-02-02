@@ -112,6 +112,10 @@ namespace MyStory.StoryRepair
                 {
                     storyData.SetID(i, CsvDataInputScript.Instance.CardsCsvDatas[currentChapter].Length);
                 }
+                if(cells[i].Type == CellType.Text)
+                {
+                    storyData.SetID(i, -1);
+                }
             }
         }
 
