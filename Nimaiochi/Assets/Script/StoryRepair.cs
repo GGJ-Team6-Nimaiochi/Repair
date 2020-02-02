@@ -87,13 +87,11 @@ namespace MyStory.StoryRepair
 
             nonSelectTextContent.SetActive(true);
             textContent.SetActive(true);
-            var dropFildIndex = 0;
             for(int i = 0 ; i < cells.Length ; i++)
             {
                 if(cells[i].Type == CellType.Select || cells[i].Type == CellType.SelectText)
                 {
-                    CreatDropFildList(dropFildIndex, cells[i].ViewText);
-                    dropFildIndex++;
+                    CreatDropFildList(i, cells[i].ViewText);
                     continue;
                 }
                 var pagetext = Instantiate(nonSelectTextContent, textParent.transform);
