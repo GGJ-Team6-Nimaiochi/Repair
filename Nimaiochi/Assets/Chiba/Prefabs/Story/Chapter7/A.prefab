@@ -338,7 +338,7 @@ MonoBehaviour:
   houses:
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7993543098451641956}
 --- !u!1 &8892260660743541346
 GameObject:
   m_ObjectHideFlags: 0
