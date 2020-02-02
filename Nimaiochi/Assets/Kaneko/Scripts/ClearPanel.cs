@@ -67,9 +67,15 @@ public class ClearPanel : Panel
 
         reReadButton.onClick.AddListener(() =>
         {
+            gameClearMessage.SetActive(false);
+            reReadButton.gameObject.SetActive(false);
+            gotoTitleButton.gameObject.SetActive(false);
             StartCoroutine(ScrollAnimation(()=>
             {
-
+                gameClearMessage.SetActive(true);
+                reReadButton.gameObject.SetActive(true);
+                reReadButton.interactable = true;
+                gotoTitleButton.gameObject.SetActive(true);
             }));
         });
     }
@@ -113,6 +119,8 @@ public class ClearPanel : Panel
 
     IEnumerator ScrollAnimation(System.Action callback = null)
     {
+        backPanel.SetActive(true);
+        textContainer.gameObject.SetActive(true);
         var startDelayTime = 0.5f;
         textContainer.anchoredPosition = Vector2.down * 750.0f;
 
