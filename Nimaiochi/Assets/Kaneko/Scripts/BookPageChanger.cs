@@ -27,7 +27,7 @@ public class BookPageChanger : MonoBehaviour
     Animator pageAnim = null;
 
     [SerializeField]
-    SkinnedMeshRenderer pageMeshRend = null; 
+    SkinnedMeshRenderer pageMeshRend = null;
 
     BookRenderer bookRenderer = null;
 
@@ -100,7 +100,7 @@ public class BookPageChanger : MonoBehaviour
 
     void Update()
     {
-        pageAnim.Play("NextPage", 0, currentRate);
+        if(pageAnim.gameObject.activeSelf) pageAnim.Play("NextPage", 0, currentRate);
         pageMeshRend.SetBlendShapeWeight(0, Easing.Yoyo(currentRate) * 100.0f);
     }
 

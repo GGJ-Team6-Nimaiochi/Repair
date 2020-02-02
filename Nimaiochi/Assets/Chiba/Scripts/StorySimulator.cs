@@ -31,6 +31,7 @@ public class StorySimulator : MonoBehaviour
     public List<GameObject[]> ChaptersSelections = new List<GameObject[]>();
     public List<GameObject> SpecialChaptersSelections = new List<GameObject>();
     public static StorySimulator Instance = null;
+    public List<string> Story = new List<string>();
     private int id = 0;
 
     private void Awake()
@@ -68,6 +69,7 @@ public class StorySimulator : MonoBehaviour
         
         if(!storyText.transform.parent.gameObject.activeSelf)storyText.transform.parent.gameObject.SetActive(true);
         storyText.text = SelectStoryData.Instance.text[key];
+        Story.Add(storyText.text);
         id++;
     }
 
