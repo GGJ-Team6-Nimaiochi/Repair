@@ -23,6 +23,7 @@ public class StorySimulator : MonoBehaviour
     [SerializeField] private GameObject[] chapter6Selections;
     [SerializeField] private GameObject[] chapter7Selections;
     [SerializeField] private GameObject[] chapter8Selections;
+    [SerializeField] private GameObject[] chapter9Selections;
     [SerializeField] private GameObject[] ending;
     
     [SerializeField] private Text storyText;
@@ -44,6 +45,7 @@ public class StorySimulator : MonoBehaviour
         ChaptersSelections.Add(chapter6Selections);
         ChaptersSelections.Add(chapter7Selections);
         ChaptersSelections.Add(chapter8Selections);
+        ChaptersSelections.Add(chapter9Selections);
         ChaptersSelections.Add(ending);
 
         this.UpdateAsObservable().Where(_ => IsStory && PlayAll && Input.GetMouseButtonDown(0)).Subscribe(_ => SetStoryText(id)).AddTo(this);

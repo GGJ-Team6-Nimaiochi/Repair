@@ -1474,7 +1474,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 1904050473}
+  m_Material: {fileID: 1337198493}
   m_Color: {r: 0.98823535, g: 0.93725497, b: 0.83921576, a: 1}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
@@ -1517,7 +1517,7 @@ MonoBehaviour:
   _OffsetY: 10
   _DistanceX: 0.015
   _DistanceY: 0.03
-  _WaveTimeX: 4.278958
+  _WaveTimeX: 0.83999115
   _WaveTimeY: 0.12
   AutoPlayWaveX: 1
   AutoPlaySpeedX: 2
@@ -1604,7 +1604,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &658601344
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1731,7 +1731,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &730141141
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2553,69 +2553,76 @@ MonoBehaviour:
   chapter1Selections:
   - {fileID: 4735355944933191660, guid: 9d3a8326d012843218bbe28e58b7e16a, type: 3}
   chapter2Selections:
-  - {fileID: 7993543099324400210, guid: fe2445044504247f8b8cd9038ee7deba, type: 3}
-  - {fileID: 7993543099324400210, guid: fe2445044504247f8b8cd9038ee7deba, type: 3}
-  - {fileID: 7993543099324400210, guid: fe2445044504247f8b8cd9038ee7deba, type: 3}
-  - {fileID: 7993543099324400210, guid: fe2445044504247f8b8cd9038ee7deba, type: 3}
-  - {fileID: 7993543099324400210, guid: fe2445044504247f8b8cd9038ee7deba, type: 3}
-  - {fileID: 7993543099324400210, guid: fe2445044504247f8b8cd9038ee7deba, type: 3}
+  - {fileID: 3557458690850254429, guid: f05ef46870d2e41ce8b7d88d36d261de, type: 3}
+  - {fileID: 3557458690850254429, guid: 6b676d86aa312471ba5f0e14ac4dab8c, type: 3}
+  - {fileID: 3557458690850254429, guid: f28119c2c61f94dcaab8930857ef02ac, type: 3}
+  - {fileID: 3557458690850254429, guid: f28119c2c61f94dcaab8930857ef02ac, type: 3}
+  - {fileID: 7993543099324400210, guid: 66de485d5a32ee14aa1cc45ac5547e83, type: 3}
+  - {fileID: 5137974864060336371, guid: 642829eb0a42c430eb0b0527d5a36d7b, type: 3}
   chapter3Selections:
   - {fileID: 7993543099324400210, guid: d727da1d21b3047d79dab924e09cf6e6, type: 3}
+  - {fileID: 7993543099324400210, guid: ea027a5de270c459e8e0d7e22a518849, type: 3}
+  - {fileID: 3557458690850254429, guid: 55437961070d34c4095d45e5d4443838, type: 3}
   - {fileID: 7993543099324400210, guid: d727da1d21b3047d79dab924e09cf6e6, type: 3}
-  - {fileID: 7993543099324400210, guid: d727da1d21b3047d79dab924e09cf6e6, type: 3}
-  - {fileID: 7993543099324400210, guid: d727da1d21b3047d79dab924e09cf6e6, type: 3}
-  - {fileID: 7993543099324400210, guid: d727da1d21b3047d79dab924e09cf6e6, type: 3}
-  - {fileID: 7993543099324400210, guid: d727da1d21b3047d79dab924e09cf6e6, type: 3}
+  - {fileID: 7993543099324400210, guid: ea027a5de270c459e8e0d7e22a518849, type: 3}
+  - {fileID: 3557458690850254429, guid: 55437961070d34c4095d45e5d4443838, type: 3}
   chapter4Selections:
   - {fileID: 7993543099324400210, guid: cb13485c6c52842d29b8ada8aeb2b37a, type: 3}
+  - {fileID: 3557458690850254429, guid: 6c2a7002858664a859314ff69b7677e1, type: 3}
+  - {fileID: 3557458690850254429, guid: 8e065307231c440a8a3e369954275d41, type: 3}
   - {fileID: 7993543099324400210, guid: cb13485c6c52842d29b8ada8aeb2b37a, type: 3}
-  - {fileID: 7993543099324400210, guid: cb13485c6c52842d29b8ada8aeb2b37a, type: 3}
-  - {fileID: 7993543099324400210, guid: cb13485c6c52842d29b8ada8aeb2b37a, type: 3}
-  - {fileID: 7993543099324400210, guid: cb13485c6c52842d29b8ada8aeb2b37a, type: 3}
+  - {fileID: 7993543099324400210, guid: d4eb255f8964f49c59d59e7cd5c56d6d, type: 3}
   - {fileID: 7993543099324400210, guid: cb13485c6c52842d29b8ada8aeb2b37a, type: 3}
   chapter5Selections:
-  - {fileID: 7993543099324400210, guid: 5663d28b478a44edeabd25e18bc40bae, type: 3}
-  - {fileID: 7993543099324400210, guid: 5663d28b478a44edeabd25e18bc40bae, type: 3}
-  - {fileID: 7993543099324400210, guid: 5663d28b478a44edeabd25e18bc40bae, type: 3}
-  - {fileID: 7993543099324400210, guid: 5663d28b478a44edeabd25e18bc40bae, type: 3}
-  - {fileID: 7993543099324400210, guid: 5663d28b478a44edeabd25e18bc40bae, type: 3}
-  - {fileID: 7993543099324400210, guid: 5663d28b478a44edeabd25e18bc40bae, type: 3}
+  - {fileID: 7993543099324400210, guid: b84c60ad73062452c97250076a6d3b4e, type: 3}
+  - {fileID: 7993543099324400210, guid: 95c9d4ed62b4f481da800d9d07f20ed0, type: 3}
+  - {fileID: 3557458690850254429, guid: 1dd26d83f9e704a65b51ce37e4e78de7, type: 3}
+  - {fileID: 7993543099324400210, guid: b84c60ad73062452c97250076a6d3b4e, type: 3}
+  - {fileID: 7993543099324400210, guid: 95c9d4ed62b4f481da800d9d07f20ed0, type: 3}
+  - {fileID: 3557458690850254429, guid: 1dd26d83f9e704a65b51ce37e4e78de7, type: 3}
   chapter6Selections:
-  - {fileID: 7993543099324400210, guid: 3e64bf30588f84f1a96842711a10c9af, type: 3}
-  - {fileID: 7993543099324400210, guid: 3e64bf30588f84f1a96842711a10c9af, type: 3}
-  - {fileID: 7993543099324400210, guid: 3e64bf30588f84f1a96842711a10c9af, type: 3}
-  - {fileID: 7993543099324400210, guid: 3e64bf30588f84f1a96842711a10c9af, type: 3}
-  - {fileID: 7993543099324400210, guid: 3e64bf30588f84f1a96842711a10c9af, type: 3}
-  - {fileID: 7993543099324400210, guid: 3e64bf30588f84f1a96842711a10c9af, type: 3}
+  - {fileID: 3557458690850254429, guid: efda8c144398743bdb926bb9c397f784, type: 3}
+  - {fileID: 3557458690850254429, guid: efda8c144398743bdb926bb9c397f784, type: 3}
+  - {fileID: 3557458690850254429, guid: a68c32cc95916462489806d599975c55, type: 3}
+  - {fileID: 7993543099324400210, guid: 8638751583f6a43e292a383cd2701432, type: 3}
+  - {fileID: 7993543099324400210, guid: 8638751583f6a43e292a383cd2701432, type: 3}
+  - {fileID: 7993543099324400210, guid: 83801ce491eec44c4b784b01f9e6ca1d, type: 3}
   chapter7Selections:
-  - {fileID: 7993543099324400210, guid: f46706722d726432095a93a36bdc07e2, type: 3}
-  - {fileID: 7993543099324400210, guid: f46706722d726432095a93a36bdc07e2, type: 3}
-  - {fileID: 7993543099324400210, guid: f46706722d726432095a93a36bdc07e2, type: 3}
-  - {fileID: 7993543099324400210, guid: f46706722d726432095a93a36bdc07e2, type: 3}
-  - {fileID: 7993543099324400210, guid: f46706722d726432095a93a36bdc07e2, type: 3}
-  - {fileID: 7993543099324400210, guid: f46706722d726432095a93a36bdc07e2, type: 3}
+  - {fileID: 7993543099324400210, guid: 8803c88e5b81e42ce92536d0dcc9c07c, type: 3}
+  - {fileID: 7993543099324400210, guid: 17087542fb8d14e0b9e5a3b51524e625, type: 3}
+  - {fileID: 3557458690850254429, guid: 5542ce80ce9e3422387013672e7f9490, type: 3}
+  - {fileID: 7993543099324400210, guid: 8803c88e5b81e42ce92536d0dcc9c07c, type: 3}
+  - {fileID: 7993543099324400210, guid: 17087542fb8d14e0b9e5a3b51524e625, type: 3}
+  - {fileID: 3557458690850254429, guid: 5542ce80ce9e3422387013672e7f9490, type: 3}
   chapter8Selections:
-  - {fileID: 7993543099324400210, guid: e09e7ed207fbe4f2fa57b4b498d70def, type: 3}
-  - {fileID: 7993543099324400210, guid: e09e7ed207fbe4f2fa57b4b498d70def, type: 3}
-  - {fileID: 7993543099324400210, guid: e09e7ed207fbe4f2fa57b4b498d70def, type: 3}
-  - {fileID: 7993543099324400210, guid: e09e7ed207fbe4f2fa57b4b498d70def, type: 3}
-  - {fileID: 7993543099324400210, guid: e09e7ed207fbe4f2fa57b4b498d70def, type: 3}
-  - {fileID: 7993543099324400210, guid: e09e7ed207fbe4f2fa57b4b498d70def, type: 3}
+  - {fileID: 7993543099324400210, guid: e797b28ca9f494420b1659aebb66dbe4, type: 3}
+  - {fileID: 3557458690850254429, guid: ed982cbcb775249a889c902cf6c8a613, type: 3}
+  - {fileID: 3557458690850254429, guid: 94d52fa99a481491f99bad7ce8185f8c, type: 3}
+  - {fileID: 3557458690850254429, guid: 94d52fa99a481491f99bad7ce8185f8c, type: 3}
+  - {fileID: 7993543099324400210, guid: e797b28ca9f494420b1659aebb66dbe4, type: 3}
+  - {fileID: 3557458690850254429, guid: ed982cbcb775249a889c902cf6c8a613, type: 3}
+  chapter9Selections:
+  - {fileID: 7993543099324400210, guid: 86604afa83c824ba8bd276520b6b3b09, type: 3}
+  - {fileID: 7993543099324400210, guid: 383eaa2a4fcf2b346baef82bfd2c78b7, type: 3}
+  - {fileID: 7993543099324400210, guid: 86604afa83c824ba8bd276520b6b3b09, type: 3}
+  - {fileID: 7993543099324400210, guid: 383eaa2a4fcf2b346baef82bfd2c78b7, type: 3}
+  - {fileID: 7993543099324400210, guid: 86604afa83c824ba8bd276520b6b3b09, type: 3}
+  - {fileID: 7993543099324400210, guid: 383eaa2a4fcf2b346baef82bfd2c78b7, type: 3}
   ending:
-  - {fileID: 7993543099324400210, guid: 900f577db6ad54d3e9343743b89b2490, type: 3}
-  - {fileID: 7993543099324400210, guid: 900f577db6ad54d3e9343743b89b2490, type: 3}
-  - {fileID: 7993543099324400210, guid: 900f577db6ad54d3e9343743b89b2490, type: 3}
-  - {fileID: 7993543099324400210, guid: 900f577db6ad54d3e9343743b89b2490, type: 3}
-  - {fileID: 7993543099324400210, guid: 900f577db6ad54d3e9343743b89b2490, type: 3}
-  - {fileID: 7993543099324400210, guid: 900f577db6ad54d3e9343743b89b2490, type: 3}
+  - {fileID: 7993543099324400210, guid: 383eaa2a4fcf2b346baef82bfd2c78b7, type: 3}
+  - {fileID: 7993543099324400210, guid: 86604afa83c824ba8bd276520b6b3b09, type: 3}
+  - {fileID: 7993543099324400210, guid: 383eaa2a4fcf2b346baef82bfd2c78b7, type: 3}
+  - {fileID: 7993543099324400210, guid: 86604afa83c824ba8bd276520b6b3b09, type: 3}
+  - {fileID: 7993543099324400210, guid: 383eaa2a4fcf2b346baef82bfd2c78b7, type: 3}
+  - {fileID: 7993543099324400210, guid: 86604afa83c824ba8bd276520b6b3b09, type: 3}
   storyText: {fileID: 1905991639}
   SpecialChaptersSelections:
-  - {fileID: 4735355944933191660, guid: 9d3a8326d012843218bbe28e58b7e16a, type: 3}
-  - {fileID: 7993543099324400210, guid: fe2445044504247f8b8cd9038ee7deba, type: 3}
-  - {fileID: 7993543099324400210, guid: d727da1d21b3047d79dab924e09cf6e6, type: 3}
-  - {fileID: 7993543099324400210, guid: cb13485c6c52842d29b8ada8aeb2b37a, type: 3}
-  - {fileID: 7993543099324400210, guid: 5663d28b478a44edeabd25e18bc40bae, type: 3}
-  - {fileID: 7993543099324400210, guid: 3e64bf30588f84f1a96842711a10c9af, type: 3}
+  - {fileID: 4153777653870259505, guid: 0f849281e5a1d4c6793acdc42cbfdd9c, type: 3}
+  - {fileID: 4153777653870259505, guid: 0f849281e5a1d4c6793acdc42cbfdd9c, type: 3}
+  - {fileID: 4153777653870259505, guid: 0f849281e5a1d4c6793acdc42cbfdd9c, type: 3}
+  - {fileID: 4153777653870259505, guid: 0f849281e5a1d4c6793acdc42cbfdd9c, type: 3}
+  - {fileID: 4153777653870259505, guid: 0f849281e5a1d4c6793acdc42cbfdd9c, type: 3}
+  - {fileID: 4153777653870259505, guid: 0f849281e5a1d4c6793acdc42cbfdd9c, type: 3}
 --- !u!4 &1157136929
 Transform:
   m_ObjectHideFlags: 0
@@ -2915,6 +2922,45 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1289165740}
   m_CullTransparentMesh: 0
+--- !u!21 &1337198493
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 2DxFX/Standard/Wave
+  m_Shader: {fileID: 4800000, guid: a3824d7b00ea82d4cb92e05c44536ddc, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _Alpha: 0
+    - _ColorMask: 15
+    - _DistanceX: 0.015
+    - _DistanceY: 0.03
+    - _OffsetX: 10
+    - _OffsetY: 10
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _WaveTimeX: 0.5347924
+    - _WaveTimeY: 0.12
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!95 &1438756315 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: -6057140222963153312, guid: 9c3634febaaf941858a7c7c88f918fa2,
@@ -3766,40 +3812,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1851512426}
   m_CullTransparentMesh: 0
---- !u!21 &1904050473
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Sprites/Default
-  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _AlphaTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - PixelSnap: 0
-    - _EnableExternalAlpha: 0
-    m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Flip: {r: 1, g: 1, b: 1, a: 1}
-    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1905991638
 GameObject:
   m_ObjectHideFlags: 0
