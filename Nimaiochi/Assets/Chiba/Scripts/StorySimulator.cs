@@ -41,7 +41,7 @@ public class StorySimulator : MonoBehaviour
         ChaptersSelections.Add(chapter6Selections);
         ChaptersSelections.Add(ending);
 
-        this.UpdateAsObservable().Where(_ => IsStory && Input.GetMouseButtonDown(0)).Subscribe(_ => SetStoryText(id)).AddTo(this);
+        this.UpdateAsObservable().Where(_ => IsStory && PlayAll && Input.GetMouseButtonDown(0)).Subscribe(_ => SetStoryText(id)).AddTo(this);
         this.UpdateAsObservable().Where(_ => IsStory && !PlayAll && Input.GetMouseButtonDown(0)).Subscribe(_ => SetNextStory()).AddTo(this);
     }
 
@@ -54,9 +54,11 @@ public class StorySimulator : MonoBehaviour
             if (PageEndAction != null)
                 PageEndAction();
             if (Chapter)Destroy(Chapter.transform.GetChild(0).GetComponent<Animator>());
+            id++;
             return;
         }
         
+        Debug.LogError(key);
         if(!storyText.transform.parent.gameObject.activeSelf)storyText.transform.parent.gameObject.SetActive(true);
         storyText.text = SelectStoryData.Instance.text[key];
         id++;
@@ -65,11 +67,28 @@ public class StorySimulator : MonoBehaviour
     // ストーリー表示中の文字処理
     public void SetNextStory()
     {
+        if (SelectStoryData.Instance.id[id] == -1)
+        {
+            SetStoryText(id);
+            return;
+        }
+
+        if (id >= SelectStoryData.Instance.text.Length)
+        {
+            storyText.text = "(ページをめくってね！)";
+            if (PageEndAction != null)
+                PageEndAction();
+            if (Chapter)Destroy(Chapter.transform.GetChild(0).GetComponent<Animator>());
+            id++;
+            return;
+        }
+        
         var animator = Chapter.transform.GetChild(0).GetComponent<Animator>();
         animator.SetBool("isClose", true);
-        Observable.Timer(TimeSpan.FromSeconds(1)).Subscribe(_ => Destroy(animator.gameObject)).AddTo(this);
+        Observable.Timer(TimeSpan.FromSeconds(1)).Subscribe(_ => Destroy(animator.transform.parent.gameObject)).AddTo(this);
         Chapter = Instantiate(ChaptersSelections[Phase][SelectStoryData.Instance.id[id]]);
-        Chapter.name = "Chapter_" + SelectStoryData.Instance.id[id];
+        Chapter.name = "Chapter_" + id;
+        id++;
     }
     
     // ストーリーのチャプターを見終わってページをめくったら情報リセット
