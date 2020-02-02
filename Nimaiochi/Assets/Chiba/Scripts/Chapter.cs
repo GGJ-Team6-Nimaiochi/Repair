@@ -16,7 +16,7 @@ public class Chapter : MonoBehaviour
         {
             for (int i = 0; i < houses.Length; i++)
             {
-                if(houses[i].sprite == null || SelectStoryData.Instance.id[i] == -1) continue;
+                if(houses[i] == null || SelectStoryData.Instance.id[i] == -1) continue;
                 StorySimulator.Instance.SelectHouses[i] = HouseSprites[SelectStoryData.Instance.id[i]];
                 houses[i].sprite = StorySimulator.Instance.SelectHouses[i];
             }

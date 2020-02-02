@@ -21,6 +21,8 @@ public class StorySimulator : MonoBehaviour
     [SerializeField] private GameObject[] chapter4Selections;
     [SerializeField] private GameObject[] chapter5Selections;
     [SerializeField] private GameObject[] chapter6Selections;
+    [SerializeField] private GameObject[] chapter7Selections;
+    [SerializeField] private GameObject[] chapter8Selections;
     [SerializeField] private GameObject[] ending;
     
     [SerializeField] private Text storyText;
@@ -40,6 +42,8 @@ public class StorySimulator : MonoBehaviour
         ChaptersSelections.Add(chapter4Selections);
         ChaptersSelections.Add(chapter5Selections);
         ChaptersSelections.Add(chapter6Selections);
+        ChaptersSelections.Add(chapter7Selections);
+        ChaptersSelections.Add(chapter8Selections);
         ChaptersSelections.Add(ending);
 
         this.UpdateAsObservable().Where(_ => IsStory && PlayAll && Input.GetMouseButtonDown(0)).Subscribe(_ => SetStoryText(id)).AddTo(this);
@@ -91,13 +95,11 @@ public class StorySimulator : MonoBehaviour
             animator.SetBool("isClose", true);
             Observable.Timer(TimeSpan.FromSeconds(1)).Subscribe(_ => Destroy(animator.transform.parent.gameObject)).AddTo(this);
         }
-
-        SetStoryText(id);
-
+        
         if(SelectStoryData.Instance.id[id] >= ChaptersSelections[Phase].Length) Chapter = Instantiate(SpecialChaptersSelections[Phase]);
         else Chapter = Instantiate(ChaptersSelections[Phase][SelectStoryData.Instance.id[id]]);
         Chapter.name = "Chapter_" + id;
-        id++;
+        SetStoryText(id);
     }
     
     // ストーリーのチャプターを見終わってページをめくったら情報リセット

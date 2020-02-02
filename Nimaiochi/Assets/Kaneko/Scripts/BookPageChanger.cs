@@ -53,7 +53,7 @@ public class BookPageChanger : MonoBehaviour
 
         SwipeGetter.Instance.onSwipe.AddListener((vec) =>
         {
-            if (!StorySimulator.Instance.IsStory) return;
+            if (StorySimulator.Instance.PageEndAction != null) return;
             currentRate += vec.x * swipeSpeed * Time.deltaTime * 0.01f;
             currentRate = Mathf.Clamp01(currentRate);
             UpdateMovePage(currentRate);
@@ -87,7 +87,7 @@ public class BookPageChanger : MonoBehaviour
 
         yield return KKUtilities.FloatLerp(duration, (t) =>
         {
-            if (!StorySimulator.Instance.IsStory) return;
+            if (StorySimulator.Instance.PageEndAction != null) return;
             UpdateMovePage(Mathf.Lerp(start, targetRate, t));
         });
 
@@ -108,6 +108,7 @@ public class BookPageChanger : MonoBehaviour
     {
         currentRate = rate; 
 
+        if (!StorySimulator.Instance.IsStory) return;
         // 紙芝居アニメーションしてます
         if (StorySimulator.Instance.Chapter && rate > 0) StorySimulator.Instance.Chapter.transform.GetChild(0).localScale = new Vector3(1 - 1 * rate, 1 - 1 * rate, 1 - 1 * rate);
         if (StorySimulator.Instance.Chapter && rate > 0) StorySimulator.Instance.Chapter.transform.GetChild(0).transform.localPosition = new Vector3(0 - 10f * rate, StorySimulator.Instance.Chapter.transform.GetChild(0).transform.localPosition.y, StorySimulator.Instance.Chapter.transform.GetChild(0).transform.localPosition.z);
