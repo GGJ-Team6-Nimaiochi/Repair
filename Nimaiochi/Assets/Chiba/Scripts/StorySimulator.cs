@@ -11,7 +11,7 @@ public class StorySimulator : MonoBehaviour
     [HideInInspector] public bool IsStory = false;
     [HideInInspector] public bool PlayAll = false;
     [HideInInspector] public int Phase = 0;
-    [HideInInspector] public Sprite[] SelectHouses = new Sprite[3];
+    public Sprite[] SelectHouses = new Sprite[3];
     [HideInInspector] public GameObject Chapter = null;
     [HideInInspector] public Action PageEndAction = null;
 

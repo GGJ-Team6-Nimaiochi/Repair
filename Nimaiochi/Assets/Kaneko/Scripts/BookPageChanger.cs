@@ -111,7 +111,7 @@ public class BookPageChanger : MonoBehaviour
         if (!StorySimulator.Instance.IsStory) return;
         // 紙芝居アニメーションしてます
         if (StorySimulator.Instance.Chapter && rate > 0) StorySimulator.Instance.Chapter.transform.GetChild(0).localScale = new Vector3(1 - 1 * rate, 1 - 1 * rate, 1 - 1 * rate);
-        if (StorySimulator.Instance.Chapter && rate > 0) StorySimulator.Instance.Chapter.transform.GetChild(0).transform.localPosition = new Vector3(0 - 10f * rate, StorySimulator.Instance.Chapter.transform.GetChild(0).transform.localPosition.y, StorySimulator.Instance.Chapter.transform.GetChild(0).transform.localPosition.z);
+        if (StorySimulator.Instance.Chapter && rate > 0) StorySimulator.Instance.Chapter.transform.GetChild(0).transform.localPosition = new Vector3(0 - 9f * rate, StorySimulator.Instance.Chapter.transform.GetChild(0).transform.localPosition.y, StorySimulator.Instance.Chapter.transform.GetChild(0).transform.localPosition.z);
     }
 
     void UpdateTexture(int index)
