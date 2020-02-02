@@ -18,16 +18,22 @@ public class BookPageChanger : MonoBehaviour
     PageTexture[] pageTextures = null;
 
     [SerializeField]
-    Transform pageTransform = null;
+    float swipeSpeed = 0.02f;
 
     [SerializeField]
-    float swipeSpeed = 0.02f;
+    Animator bookAnim = null;
+
+    [SerializeField]
+    Animator pageAnim = null;
+
+    [SerializeField]
+    SkinnedMeshRenderer pageMeshRend = null; 
 
     BookRenderer bookRenderer = null;
 
     int maxPageIndex = 3;
     int currentPageIndex = 0;
-    float currentRate;
+    float currentRate = 0.0f;
     bool isAnimating;
     private bool isReturn = false;
     
@@ -54,7 +60,7 @@ public class BookPageChanger : MonoBehaviour
 
         SwipeGetter.Instance.onTouchEnd.AddListener((_) =>
         {
-            if (currentRate < 0.2f)
+            if (currentRate < 0.05f)
             {
                 isReturn = true;
                 StartCoroutine(ChangePageAnimation(0.0f, currentPageIndex));
@@ -90,11 +96,17 @@ public class BookPageChanger : MonoBehaviour
         isAnimating = false;
     }
 
+    void Update()
+    {
+        pageAnim.Play("NextPage", 0, currentRate);
+        pageMeshRend.SetBlendShapeWeight(0, Easing.Yoyo(currentRate) * 100.0f);
+    }
+
     void UpdateMovePage(float rate)
     {
+        currentRate = rate; 
+
         if (!StorySimulator.Instance.IsStory) return;
-        
-        pageTransform.SetRotationZ(Mathf.Lerp(-89.0f, 90.0f, rate));
         // 紙芝居アニメーションしてます
         if (StorySimulator.Instance.Chapter && rate > 0) StorySimulator.Instance.Chapter.transform.GetChild(0).localScale = new Vector3(1 - 1 * rate, 1 - 1 * rate, 1 - 1 * rate);
         if (StorySimulator.Instance.Chapter && rate > 0) StorySimulator.Instance.Chapter.transform.GetChild(0).transform.localPosition = new Vector3(0 - 10f * rate, StorySimulator.Instance.Chapter.transform.GetChild(0).transform.localPosition.y, StorySimulator.Instance.Chapter.transform.GetChild(0).transform.localPosition.z);
