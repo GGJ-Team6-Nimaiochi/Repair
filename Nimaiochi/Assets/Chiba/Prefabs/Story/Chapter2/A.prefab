@@ -428,4 +428,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6170741e9a2849f384a13a119a75f5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HouseSprites: []
+  HouseSprites:
+  - {fileID: 21300000, guid: 79df082b294144c5fa87fb6d1426b278, type: 3}
+  - {fileID: 21300000, guid: ca33182a39bcc430cb7b6a0b95a21017, type: 3}
+  - {fileID: 21300000, guid: de56c6811d5aa40729e464edf94cf811, type: 3}
+  - {fileID: 21300000, guid: 92472bfe4f7244974a7d3123088002af, type: 3}
+  - {fileID: 21300000, guid: 5b769d2b76fe74b1684592d24aad63eb, type: 3}
+  - {fileID: 21300000, guid: 5b769d2b76fe74b1684592d24aad63eb, type: 3}
+  houses:
+  - {fileID: 7993543098451641956}

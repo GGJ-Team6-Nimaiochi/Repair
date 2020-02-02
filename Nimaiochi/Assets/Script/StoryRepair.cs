@@ -201,7 +201,7 @@ namespace MyStory.StoryRepair
                         break;
                     default:
                         StorySimulator.Instance.Chapter = Instantiate(StorySimulator.Instance.ChaptersSelections[StorySimulator.Instance.Phase][SelectStoryData.Instance.id[0]]);
-                        StorySimulator.Instance.Chapter.name = "Chapter_" + SelectStoryData.Instance.id[0];
+                        StorySimulator.Instance.Chapter.name = "Chapter_0";
                         StorySimulator.Instance.PlayAll = false;
                         break;
                     
