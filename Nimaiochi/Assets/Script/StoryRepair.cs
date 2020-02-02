@@ -35,7 +35,7 @@ namespace MyStory.StoryRepair
         public static StoryRepair Instance;
         public KanekoUtilities.Panel StoryRepairPanel; 
 
-        private List<GameObject> pageContentList;
+        private List<DragManage> pageContentList;
         private List<GameObject> textContentList;
         private List<GameObject> nonSelectTextContentList;
 
@@ -171,11 +171,14 @@ namespace MyStory.StoryRepair
         private void CreatPageList(int selectPointNum)
         {
             if(selectPointNum == 1) return;
+            pageContentList = new List<DragManage>();
             pageContent.SetActive(true);
             for(int i = 0 ; i < selectPointNum ; i++)
             {
                 var page = Instantiate(pageContent, PageParent.transform);
-                page.transform.GetComponent<DragManage>().SetPageContentData(new PageContentData(CsvDataInputScript.Instance.CardsCsvDatas[currentChapter][i], currentChapter, i));
+                var dropManage = page.transform.GetComponent<DragManage>();
+                dropManage.SetPageContentData(new PageContentData(CsvDataInputScript.Instance.CardsCsvDatas[currentChapter][i], currentChapter, i));
+                pageContentList.Add(dropManage);
             }
             pageContent.SetActive(false);
         }
@@ -193,10 +196,15 @@ namespace MyStory.StoryRepair
             selectNum++;
 
             //全て選択し終わったらNEXTを表示
-            if(selectNum >= dropFildNum)
+            if (selectNum >= dropFildNum)
             {
                 uGuiButton3D.SetActive(true);
                 resetButton.gameObject.SetActive(true);
+                foreach (var dropManage in pageContentList)
+                {
+                    if (dropManage != null)
+                        dropManage.enabled = false;
+                }
             }
         }
 
