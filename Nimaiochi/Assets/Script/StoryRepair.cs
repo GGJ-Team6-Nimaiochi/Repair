@@ -184,7 +184,6 @@ namespace MyStory.StoryRepair
             //全て選択し終わったらNEXTを表示
             if(selectNum >= dropFildNum)
             {
-                nextButton.gameObject.SetActive(true);
                 uGuiButton3D.SetActive(true);
             }
         }

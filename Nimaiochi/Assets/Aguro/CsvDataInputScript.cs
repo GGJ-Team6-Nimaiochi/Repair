@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System.Linq;
 
 public class CsvDataInputScript : MonoBehaviour
 {
@@ -36,7 +37,14 @@ public class CsvDataInputScript : MonoBehaviour
         while (reader.Peek() > -1) // reader.Peaekが0になるまで繰り返す
         {
             string line = reader.ReadLine(); // 一行ずつ読み込み
-            MystoryCsvDatas.Add(line.Split(',')); // , 区切りでリストに追加
+            var lineArray = line.Split(',');
+            var lineList = new List<string>(lineArray.ToList());
+            foreach (var text in lineArray)
+            {
+                if (text == "")
+                    lineList.Remove(text);
+            }
+            MystoryCsvDatas.Add(lineList.ToArray()); // , 区切りでリストに追加
             MystoryHeight++;
         }
 
