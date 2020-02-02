@@ -48,13 +48,36 @@ public class ClearPanel : Panel
     [SerializeField]
     ParticleSystem[] particles = null;
 
+    [SerializeField]
+    Panel storyRepairPanel = null;
+
+    [SerializeField]
+    Button gotoTitleButton = null;
+    [SerializeField]
+    Button reReadButton = null;
+
     float currentSpeed;
+
+    void Start()
+    {
+        gotoTitleButton.onClick.AddListener(() =>
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+        });
+
+        reReadButton.onClick.AddListener(() =>
+        {
+            StartCoroutine(ScrollAnimation(()=>
+            {
+
+            }));
+        });
+    }
 
     public void Init(string[] story)
     {
         textContainer.gameObject.SetActive(false);
         textContainer.sizeDelta = new Vector2(1500.0f, textOriginal.fontSize * story.Length * 2);
-        textContainer.anchoredPosition = Vector2.down * 750.0f;
 
         for(int i = 0 ; i < story.Length ; i++)
         {
@@ -70,7 +93,8 @@ public class ClearPanel : Panel
     {
         base.Activate();
 
-        StartCoroutine(ScrollAnimation());
+        storyRepairPanel.Deactivate();
+        StartCoroutine(ScrollAnimation(()=> StartCoroutine(CloseBookAnimation())));
     }
 
     void Update()
@@ -87,9 +111,10 @@ public class ClearPanel : Panel
         currentSpeed = Mathf.Clamp(currentSpeed, scrollSpeed, currentSpeed * 3.0f);
     }
 
-    IEnumerator ScrollAnimation()
+    IEnumerator ScrollAnimation(System.Action callback = null)
     {
         var startDelayTime = 0.5f;
+        textContainer.anchoredPosition = Vector2.down * 750.0f;
 
         yield return new WaitForSeconds(startDelayTime);
 
@@ -102,15 +127,15 @@ public class ClearPanel : Panel
             if(textContainer.anchoredPosition.y > textContainer.sizeDelta.y - 500.0f) break;
         }
 
-        StartCoroutine(CloseBookAnimation());
-    }
-
-    IEnumerator CloseBookAnimation()
-    {
         backPanel.SetActive(false);
         textContainer.gameObject.SetActive(false);
         pageObj.SetActive(false);
 
+        callback.SafeInvoke();
+    }
+
+    IEnumerator CloseBookAnimation()
+    {
         bookAnimator.Play("CloseBook");
 
         yield return new WaitForSeconds(1.5f);
@@ -146,17 +171,16 @@ public class ClearPanel : Panel
         });
 
         gameClearMessage.SetActive(true);
+        reReadButton.gameObject.SetActive(true);
+        gotoTitleButton.gameObject.SetActive(true);
         foreach(var p in particles) p.Play(true);
+
         while(true)
         {
-
-
             yield return KKUtilities.FloatLerp(3.0f, (t) =>
             {
                 bookAnimator.transform.parent.SetRotationZ(Mathf.Lerp(0.0f, 360.0f, Easing.Linear(t)));
             });
-
-            yield return new WaitForSeconds(3.0f);
         }
     }
 

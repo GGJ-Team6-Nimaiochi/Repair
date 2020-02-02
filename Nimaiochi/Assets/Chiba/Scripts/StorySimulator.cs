@@ -15,7 +15,6 @@ public class StorySimulator : MonoBehaviour
     [HideInInspector] public GameObject Chapter = null;
     [HideInInspector] public Action PageEndAction = null;
 
-    [SerializeField] ClearPanel claerPanel = null;
     [SerializeField] private GameObject[] chapter1Selections;
     [SerializeField] private GameObject[] chapter2Selections;
     [SerializeField] private GameObject[] chapter3Selections;
@@ -31,6 +30,7 @@ public class StorySimulator : MonoBehaviour
     public List<GameObject[]> ChaptersSelections = new List<GameObject[]>();
     public List<GameObject> SpecialChaptersSelections = new List<GameObject>();
     public static StorySimulator Instance = null;
+    public List<string> Story = new List<string>();
     private int id = 0;
 
     private void Awake()
@@ -51,12 +51,6 @@ public class StorySimulator : MonoBehaviour
         this.UpdateAsObservable().Where(_ => IsStory && !PlayAll && Input.GetMouseButtonDown(0)).Subscribe(_ => SetNextStory()).AddTo(this);
     }
 
-    void Start()
-    {
-        claerPanel.Init(new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P" });
-        claerPanel.Activate();
-    }
-
     // ストーリー表示中の文字処理
     public void SetStoryText(int key)
     {
@@ -73,6 +67,7 @@ public class StorySimulator : MonoBehaviour
         
         if(!storyText.transform.parent.gameObject.activeSelf)storyText.transform.parent.gameObject.SetActive(true);
         storyText.text = SelectStoryData.Instance.text[key];
+        Story.Add(storyText.text);
         id++;
     }
 

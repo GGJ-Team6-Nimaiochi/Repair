@@ -30,7 +30,8 @@ namespace MyStory.StoryRepair
         [SerializeField] Button nextButton;
         [SerializeField] private GameObject uGuiButton3D;
         [SerializeField] private Button resetButton;
-        [SerializeField] private StorySimulator stroySimulator; 
+        [SerializeField] private StorySimulator stroySimulator;
+        [SerializeField] ClearPanel clearPanel = null;
         
         public static StoryRepair Instance;
         public KanekoUtilities.Panel StoryRepairPanel; 
@@ -81,6 +82,14 @@ namespace MyStory.StoryRepair
         public void Init()
         {
             selectNum = 0;
+
+            if(currentChapter >= CsvDataInputScript.Instance.MystoryCsvDatas.Count)
+            {
+                StorySimulator.Instance.ResetStoryInfo();
+                clearPanel.Init(StorySimulator.Instance.Story.ToArray());
+                clearPanel.Activate();
+                return;
+            }
 
             DeleteContent();
 
