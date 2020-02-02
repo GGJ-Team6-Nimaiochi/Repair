@@ -293,7 +293,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7993543099324400211}
-  - component: {fileID: 267627583}
+  - component: {fileID: 6363075993907937567}
   m_Layer: 0
   m_Name: A
   m_TagString: Untagged
@@ -316,7 +316,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
---- !u!114 &267627583
+--- !u!114 &6363075993907937567
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -325,7 +325,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7993543099324400210}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4814ac3eb907429b945c2062b4c8a4b, type: 3}
+  m_Script: {fileID: 11500000, guid: 276fb81099094407384e1e436bec74d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   HouseSprites:
@@ -336,7 +336,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 5b769d2b76fe74b1684592d24aad63eb, type: 3}
   - {fileID: 21300000, guid: 0d13f58a24af542e2a79bd0e22dd7353, type: 3}
   houses:
-  - {fileID: 7993543098451641956}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &8892260660743541346
 GameObject:
   m_ObjectHideFlags: 0
@@ -349,7 +351,7 @@ GameObject:
   - component: {fileID: 3487668389482095623}
   - component: {fileID: 5155750328325584674}
   m_Layer: 8
-  m_Name: buta_2
+  m_Name: buta_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -407,7 +409,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 21300000, guid: a52825f69e07d4d9d92c53d8d129f770, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c13608db6800347ae9f0f242822a7d30, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

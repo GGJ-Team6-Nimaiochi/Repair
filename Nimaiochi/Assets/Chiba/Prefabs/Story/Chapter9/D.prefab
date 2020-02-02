@@ -474,7 +474,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7993543099324400211}
-  - component: {fileID: 6550942902173741574}
+  - component: {fileID: 184678434117851379}
   m_Layer: 0
   m_Name: D
   m_TagString: Untagged
@@ -497,7 +497,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
---- !u!114 &6550942902173741574
+--- !u!114 &184678434117851379
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -506,7 +506,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7993543099324400210}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f4c9b98c60ae431baa923471510d8bd, type: 3}
+  m_Script: {fileID: 11500000, guid: 1bc073ca0f01d4e3aa88fb5b3487629a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   HouseSprites:

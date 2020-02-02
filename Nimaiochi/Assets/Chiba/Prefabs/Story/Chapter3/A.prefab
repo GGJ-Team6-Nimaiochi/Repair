@@ -349,7 +349,7 @@ GameObject:
   - component: {fileID: 3487668389482095623}
   - component: {fileID: 5155750328325584674}
   m_Layer: 8
-  m_Name: buta_2
+  m_Name: buta_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -407,7 +407,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 21300000, guid: a52825f69e07d4d9d92c53d8d129f770, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 36f5bb036fd5246849f0b8fd352e9b1d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
