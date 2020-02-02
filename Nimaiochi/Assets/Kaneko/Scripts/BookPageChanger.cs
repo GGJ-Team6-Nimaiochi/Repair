@@ -27,7 +27,7 @@ public class BookPageChanger : MonoBehaviour
     Animator pageAnim = null;
 
     [SerializeField]
-    SkinnedMeshRenderer pageMeshRend = null; 
+    SkinnedMeshRenderer pageMeshRend = null;
 
     BookRenderer bookRenderer = null;
 
