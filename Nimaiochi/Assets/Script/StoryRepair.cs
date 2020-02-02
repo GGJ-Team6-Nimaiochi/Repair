@@ -29,6 +29,7 @@ namespace MyStory.StoryRepair
         [SerializeField] GameObject nonSelectTextContent;
         [SerializeField] Button nextButton;
         [SerializeField] private GameObject uGuiButton3D;
+        [SerializeField] private Button resetButton;
         [SerializeField] private StorySimulator stroySimulator; 
         
         public static StoryRepair Instance;
@@ -61,6 +62,14 @@ namespace MyStory.StoryRepair
                     nextButton.gameObject.SetActive(false);
                     AddChapter();
                     Init();
+                }).AddTo(this);
+            resetButton.OnClickAsObservable()
+                .Subscribe(_ =>
+                {
+                    selectTextPoint = -1;
+                    Init();
+                    uGuiButton3D.SetActive(false);
+                    resetButton.gameObject.SetActive(false);
                 }).AddTo(this);
         }
 
@@ -187,6 +196,7 @@ namespace MyStory.StoryRepair
             if(selectNum >= dropFildNum)
             {
                 uGuiButton3D.SetActive(true);
+                resetButton.gameObject.SetActive(true);
             }
         }
 
@@ -218,6 +228,7 @@ namespace MyStory.StoryRepair
                 StoryRepairPanel.Deactivate();
                 StorySimulator.Instance.PageEndAction = NextPage;
                 nextButton.gameObject.SetActive(false);
+                resetButton.gameObject.SetActive(false);
             }
             catch
             {
