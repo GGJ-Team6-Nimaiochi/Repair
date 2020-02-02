@@ -59,7 +59,6 @@ public class StorySimulator : MonoBehaviour
             return;
         }
         
-        Debug.LogError(key);
         if(!storyText.transform.parent.gameObject.activeSelf)storyText.transform.parent.gameObject.SetActive(true);
         storyText.text = SelectStoryData.Instance.text[key];
         id++;
@@ -68,12 +67,6 @@ public class StorySimulator : MonoBehaviour
     // ストーリー表示中の文字処理
     public void SetNextStory()
     {
-        if (SelectStoryData.Instance.id[id] == -1)
-        {
-            SetStoryText(id);
-            return;
-        }
-
         if (id >= SelectStoryData.Instance.text.Length)
         {
             storyText.text = "(ページをめくってね！)";
@@ -81,6 +74,12 @@ public class StorySimulator : MonoBehaviour
                 PageEndAction();
             if (Chapter)Destroy(Chapter.transform.GetChild(0).GetComponent<Animator>());
             id++;
+            return;
+        }
+        
+        if (SelectStoryData.Instance.id[id] == -1)
+        {
+            SetStoryText(id);
             return;
         }
         

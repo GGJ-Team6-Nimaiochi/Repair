@@ -202,11 +202,15 @@ namespace MyStory.StoryRepair
                         StorySimulator.Instance.PlayAll = true;
                         break;
                     default:
-                        StorySimulator.Instance.Chapter = Instantiate(StorySimulator.Instance.ChaptersSelections[StorySimulator.Instance.Phase][SelectStoryData.Instance.id[0]]);
-                        StorySimulator.Instance.Chapter.name = "Chapter_0";
+                        if (SelectStoryData.Instance.id[0] != -1)
+                        {
+                            StorySimulator.Instance.Chapter = Instantiate(StorySimulator.Instance.ChaptersSelections[StorySimulator.Instance.Phase][SelectStoryData.Instance.id[0]]);
+                            StorySimulator.Instance.Chapter.name = "Chapter_0";
+                        }
+
                         StorySimulator.Instance.PlayAll = false;
                         break;
-                    
+
                 }
                 
                 StorySimulator.Instance.IsStory = true;
