@@ -51,6 +51,7 @@ public class StorySimulator : MonoBehaviour
         if (key >= SelectStoryData.Instance.text.Length)
         {
             storyText.text = "(ページをめくってね！)";
+            KanekoUtilities.SwipeGetter.Instance.CanTouch = true;
             if (PageEndAction != null)
                 PageEndAction();
             if (Chapter)Destroy(Chapter.transform.GetChild(0).GetComponent<Animator>());

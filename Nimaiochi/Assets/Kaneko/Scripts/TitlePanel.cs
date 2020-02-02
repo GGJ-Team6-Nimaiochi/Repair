@@ -24,6 +24,7 @@ public class TitlePanel : Panel
         {
             Deactivate();
             storyRepairPanel.Activate();
+            SwipeGetter.Instance.CanTouch = false;
         }).AddTo(this);
     }
 
