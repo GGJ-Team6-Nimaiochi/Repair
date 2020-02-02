@@ -26,6 +26,7 @@ public class StorySimulator : MonoBehaviour
     [SerializeField] private Text storyText;
     
     public List<GameObject[]> ChaptersSelections = new List<GameObject[]>();
+    public List<GameObject> SpecialChaptersSelections = new List<GameObject>();
     public static StorySimulator Instance = null;
     private int id = 0;
 
@@ -80,13 +81,21 @@ public class StorySimulator : MonoBehaviour
         if (SelectStoryData.Instance.id[id] == -1)
         {
             SetStoryText(id);
+            id++;
             return;
         }
-        
-        var animator = Chapter.transform.GetChild(0).GetComponent<Animator>();
-        animator.SetBool("isClose", true);
-        Observable.Timer(TimeSpan.FromSeconds(1)).Subscribe(_ => Destroy(animator.transform.parent.gameObject)).AddTo(this);
-        Chapter = Instantiate(ChaptersSelections[Phase][SelectStoryData.Instance.id[id]]);
+
+        if (Chapter != null)
+        {
+            var animator = Chapter.transform.GetChild(0).GetComponent<Animator>();
+            animator.SetBool("isClose", true);
+            Observable.Timer(TimeSpan.FromSeconds(1)).Subscribe(_ => Destroy(animator.transform.parent.gameObject)).AddTo(this);
+        }
+
+        SetStoryText(id);
+
+        if(SelectStoryData.Instance.id[id] >= ChaptersSelections[Phase].Length) Chapter = Instantiate(SpecialChaptersSelections[Phase]);
+        else Chapter = Instantiate(ChaptersSelections[Phase][SelectStoryData.Instance.id[id]]);
         Chapter.name = "Chapter_" + id;
         id++;
     }
@@ -102,5 +111,6 @@ public class StorySimulator : MonoBehaviour
         storyText.text = "";
         StoryRepair.Instance.StoryRepairPanel.Activate();
         Destroy(Chapter);
+        Chapter = null;
     }
 }

@@ -917,7 +917,7 @@ MonoBehaviour:
     RightTexture: {fileID: 2800000, guid: 6b57cd291038c44e6925b5327fa0f5d0, type: 3}
   - LeftTexture: {fileID: 2800000, guid: c334bf4d8812843fe9cb6c4c6de97edb, type: 3}
     RightTexture: {fileID: 2800000, guid: 6b57cd291038c44e6925b5327fa0f5d0, type: 3}
-  swipeSpeed: -1
+  swipeSpeed: -2
   bookAnim: {fileID: 1920036522}
   pageAnim: {fileID: 1438756315}
   pageMeshRend: {fileID: 394868257}
@@ -2249,6 +2249,13 @@ MonoBehaviour:
   - {fileID: 7993543099324400210, guid: 900f577db6ad54d3e9343743b89b2490, type: 3}
   - {fileID: 7993543099324400210, guid: 900f577db6ad54d3e9343743b89b2490, type: 3}
   storyText: {fileID: 1905991639}
+  SpecialChaptersSelections:
+  - {fileID: 4735355944933191660, guid: 9d3a8326d012843218bbe28e58b7e16a, type: 3}
+  - {fileID: 7993543099324400210, guid: fe2445044504247f8b8cd9038ee7deba, type: 3}
+  - {fileID: 7993543099324400210, guid: d727da1d21b3047d79dab924e09cf6e6, type: 3}
+  - {fileID: 7993543099324400210, guid: cb13485c6c52842d29b8ada8aeb2b37a, type: 3}
+  - {fileID: 7993543099324400210, guid: 5663d28b478a44edeabd25e18bc40bae, type: 3}
+  - {fileID: 7993543099324400210, guid: 3e64bf30588f84f1a96842711a10c9af, type: 3}
 --- !u!4 &1157136929
 Transform:
   m_ObjectHideFlags: 0

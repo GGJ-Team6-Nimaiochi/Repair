@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 7993543098451641956}
   - component: {fileID: 3784964994435899860}
   m_Layer: 8
-  m_Name: wara_house
+  m_Name: house
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

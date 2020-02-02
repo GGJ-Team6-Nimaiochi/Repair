@@ -7,18 +7,18 @@ using UniRx.Triggers;
 public class Chapter : MonoBehaviour
 {
     public Sprite[] HouseSprites;
-    
-    [SerializeField] private SpriteRenderer[] houses;
+    public SpriteRenderer[] houses;
 
     // 各子豚の家の画像を変える
-    private void Start()
+    private void Awake()
     {
         if (houses.Length <= SelectStoryData.Instance.id.Length)
         {
             for (int i = 0; i < houses.Length; i++)
             {
-                houses[i].sprite = HouseSprites[SelectStoryData.Instance.id[i]];
+                if(houses[i].sprite == null || SelectStoryData.Instance.id[i] == -1) continue;
                 StorySimulator.Instance.SelectHouses[i] = HouseSprites[SelectStoryData.Instance.id[i]];
+                houses[i].sprite = StorySimulator.Instance.SelectHouses[i];
             }
         }
     }
