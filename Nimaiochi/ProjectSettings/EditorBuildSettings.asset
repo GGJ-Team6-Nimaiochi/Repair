@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Kaneko/Scenes/kaneko.unity
+    guid: 24549a9f79e0d4ecfbc28126ed7177b6
   m_configObjects: {}
